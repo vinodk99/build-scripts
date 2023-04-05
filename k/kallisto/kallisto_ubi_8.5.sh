@@ -31,9 +31,6 @@ git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 
-git clone https://github.com/BUStools/bustools.git
-cd bustools && mkdir build && cd build && cmake .. && make && make install && cd ../..
-
 cd ext/htslib && autoheader && autoconf && cd ../..
 mkdir build
 cd build
@@ -51,6 +48,9 @@ if ! make ; then
        echo "$PACKAGE_NAME  | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Build_Fails"
        exit 1
 fi
+
+git clone https://github.com/BUStools/bustools.git
+cd bustools && mkdir build && cd build && cmake .. && make && make install && cd ../..
 
 if ! make test ; then
       echo "------------------$PACKAGE_NAME::Build_and_Test_fails-------------------------"
