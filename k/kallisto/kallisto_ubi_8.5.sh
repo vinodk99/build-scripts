@@ -32,10 +32,16 @@ cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 
 cd ext/htslib && autoheader && autoconf && cd ../..
-mkdir build && cd build && cmake .. -DBUILD_FUNCTESTING=ON && make && make install && cd ..
+mkdir build && cd build && cmake .. -DBUILD_FUNCTESTING=ON 
+sudo make 
+sudo make install 
+cd ..
 
 git clone https://github.com/BUStools/bustools.git
-cd bustools && mkdir build && cd build && cmake .. && make && make install && cd ../..
+cd bustools && mkdir build && cd build && cmake .. 
+sudo make 
+sudo make install 
+cd ../..
 
 cd build
 
