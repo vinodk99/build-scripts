@@ -31,19 +31,19 @@ git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 
-cd ext/htslib && autoheader && autoconf && cd ../..
-mkdir build && cd build && cmake .. -DBUILD_FUNCTESTING=ON 
-sudo make 
-sudo make install 
-cd ..
-
 git clone https://github.com/BUStools/bustools.git
-cd bustools && mkdir build && cd build && cmake .. 
-sudo make 
-sudo make install 
-cd ../..
+cd bustools && mkdir build && cd build && cmake .. && make && make install && cd ../..
 
+cd ext/htslib && autoheader && autoconf && cd ../..
+mkdir build
 cd build
+cmake .. -DBUILD_FUNCTESTING=ON
+
+if ! make install ; then
+      echo "------------------$PACKAGE_NAME::Install_fails-------------------------"
+      echo "$PACKAGE_URL $PACKAGE_NAME"
+      echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub  | Fail | Install_fails"
+fi
 
 if ! make ; then
        echo "------------------$PACKAGE_NAME:Build_fails---------------------"
@@ -52,7 +52,9 @@ if ! make ; then
        exit 1
 fi
 
-if ! sudo make test ; then
+cp /usr/local/bin/bustools /usr/bin/bustools
+
+if ! make test ; then
       echo "------------------$PACKAGE_NAME::Build_and_Test_fails-------------------------"
       echo "$PACKAGE_URL $PACKAGE_NAME"
       echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub  | Fail|  Build_and_Test_fails"
@@ -63,4 +65,3 @@ else
       echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub  | Pass |  Both_Build_and_Test_Success"
       exit 0
 fi
-
