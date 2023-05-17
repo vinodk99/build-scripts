@@ -41,7 +41,6 @@ cd vault
 git checkout $PACKAGE_VERSION
 
 go mod tidy
-make bootstrap
 go mod vendor
 make
 
