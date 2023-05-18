@@ -34,6 +34,8 @@ mkdir -p /go/src/github.com/hashicorp
 
 export GOPATH=/go
 export PATH=$PATH:$GOPATH/bin
+export CGO_ENABLED="0"
+
 
 cd /go/src/github.com/hashicorp
 git clone $PACKAGE_URL
