@@ -38,8 +38,8 @@ npm install -g yarn
 git clone https://github.com/bubenshchykov/ngrok.git && cd ngrok
 git checkout v3.4.0
 sed -i -e "47 a linuxppc64: cdn + cdnPath + 'linux-ppc64le.zip' ," download.js
-sudo yarn global add ngork --modules-folder /usr/lib/node_modules
-sudo yarn global add exp --modules-folder /usr/lib/node_modules
+yarn global add ngork --modules-folder /usr/lib/node_modules
+yarn global add exp --modules-folder /usr/lib/node_modules
 
 #2. Building zulngrok version 4.1.0
 cd ..
