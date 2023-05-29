@@ -32,12 +32,14 @@ export PATH=$HOME_DIR/node-v14.21.2-linux-ppc64le/bin:$PATH
 node -v
 npm -v
 which npm
+npm install -g yarn
 
 #1. Building ngrok version 3.4.0 from github
 git clone https://github.com/bubenshchykov/ngrok.git && cd ngrok
 git checkout v3.4.0
 sed -i -e "47 a linuxppc64: cdn + cdnPath + 'linux-ppc64le.zip' ," download.js
-npm install 
+yarn global add ngrok
+yarn global add exp
 
 #2. Building zulngrok version 4.1.0
 cd ..
