@@ -23,7 +23,15 @@ PACKAGE_NAME=engine.io-parser
 PACKAGE_URL=https://github.com/socketio/engine.io-parser
 HOME_DIR=${PWD}
 
-yum install git wget curl tar nodejs npm -y
+yum install git wget curl tar -y
+
+cd $HOME_DIR
+wget https://nodejs.org/dist/v14.21.2/node-v14.21.2-linux-ppc64le.tar.gz
+tar -xzf node-v14.21.2-linux-ppc64le.tar.gz
+export PATH=$HOME_DIR/node-v14.21.2-linux-ppc64le/bin:$PATH
+node -v
+npm -v
+which npm
 
 #1. Building ngrok version 3.4.0 from github
 git clone https://github.com/bubenshchykov/ngrok.git && cd ngrok
