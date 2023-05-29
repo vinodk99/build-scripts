@@ -36,8 +36,7 @@ which npm
 #1. Building ngrok version 3.4.0 from github
 git clone https://github.com/bubenshchykov/ngrok.git && cd ngrok
 git checkout v3.4.0
-sudo sed -i -e "47 a linuxppc64: cdn + cdnPath + 'linux-ppc64le.zip' ," download.js
-sudo chown -R $(whoami) /usr/{lib/node_modules}
+sed -i -e "47 a linuxppc64: cdn + cdnPath + 'linux-ppc64le.zip' ," download.js
 npm install 
 
 #2. Building zulngrok version 4.1.0
