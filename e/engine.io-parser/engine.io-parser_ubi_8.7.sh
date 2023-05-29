@@ -26,12 +26,11 @@ HOME_DIR=${PWD}
 yum install git wget curl tar -y
 
 cd $HOME_DIR
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-nvm install 14
-nvm use 14
+wget https://nodejs.org/dist/v14.21.2/node-v14.21.2-linux-ppc64le.tar.gz
+tar -xzf node-v14.21.2-linux-ppc64le.tar.gz
+export PATH=$HOME_DIR/node-v14.21.2-linux-ppc64le/bin:$PATH
+node -v
+npm -v
 
 #1. Building ngrok version 3.4.0 from github
 git clone https://github.com/bubenshchykov/ngrok.git && cd ngrok
