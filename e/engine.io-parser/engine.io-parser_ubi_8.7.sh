@@ -37,12 +37,13 @@ which npm
 git clone https://github.com/bubenshchykov/ngrok.git && cd ngrok
 git checkout v3.4.0
 sudo sed -i -e "47 a linuxppc64: cdn + cdnPath + 'linux-ppc64le.zip' ," download.js
-npm install --dev exp
+sudo chown -R $(whoami) /usr/{lib/node_modules}
+npm install 
 
 #2. Building zulngrok version 4.1.0
 cd ..
 git clone https://github.com/rase-/zuul-ngrok.git && cd zuul-ngrok
-npm install --dev exp --save file:../ngrok
+npm install --save file:../ngrok
 cd ..
 
 git clone $PACKAGE_URL
