@@ -23,7 +23,7 @@ PACKAGE_NAME=engine.io-parser
 PACKAGE_URL=https://github.com/socketio/engine.io-parser
 HOME_DIR=${PWD}
 
-sudo yum install git wget sudo curl tar -y
+yum install git wget curl tar -y
 
 cd $HOME_DIR
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
