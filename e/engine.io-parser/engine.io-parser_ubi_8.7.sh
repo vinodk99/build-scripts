@@ -42,7 +42,7 @@ npm install --dev exp
 #2. Building zulngrok version 4.1.0
 cd ..
 git clone https://github.com/rase-/zuul-ngrok.git && cd zuul-ngrok
-npm install --save file:../ngrok
+sudo npm install --save file:../ngrok
 cd ..
 
 git clone $PACKAGE_URL
