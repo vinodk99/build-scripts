@@ -36,7 +36,7 @@ npm -v
 git clone https://github.com/bubenshchykov/ngrok.git && cd ngrok
 git checkout v3.4.0
 sed -i -e "47 a linuxppc64: cdn + cdnPath + 'linux-ppc64le.zip' ," download.js
-npm install
+npm install -g 
 
 #2. Building zulngrok version 4.1.0
 cd ..
