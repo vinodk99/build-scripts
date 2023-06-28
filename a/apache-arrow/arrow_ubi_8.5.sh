@@ -20,7 +20,7 @@
 
 PACKAGE_NAME=arrow
 PACKAGE_URL=https://github.com/apache/arrow.git
-PACKAGE_VERSION=${1:-go/v12.0.1}
+PACKAGE_VERSION=${1:-go/v11.0.0}
 GO_VERSION=${GO_VERSION:-1.20.3}
 
 OS_NAME=$(grep ^PRETTY_NAME /etc/os-release | cut -d= -f2)
