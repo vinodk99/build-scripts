@@ -31,7 +31,7 @@ rm -rf go${GO_VERSION}.linux-ppc64le.tar.gz
 export PATH=/usr/local/go/bin:$PATH
 
 mkdir -p /go/src/github.com/hashicorp
-
+ 
 export GOPATH=/go
 export PATH=$PATH:$GOPATH/bin
 
