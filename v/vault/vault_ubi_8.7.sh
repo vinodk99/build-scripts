@@ -20,7 +20,7 @@
 
 PACKAGE_NAME=vault
 PACKAGE_VERSION=${1:-v1.13.1}
-GO_VERSION=${GO_VERSION:-1.20.1}
+GO_VERSION=${GO_VERSION:-1.20}
 PACKAGE_URL=https://github.com/hashicorp/vault
 
 yum install -y openssl sudo make git gcc wget
