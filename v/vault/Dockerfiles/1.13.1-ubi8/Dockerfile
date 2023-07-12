@@ -8,7 +8,7 @@ ENV GOPATH=/go
 ENV PATH=/usr/local/bin/:$GOPATH/bin/:$PATH
 
 RUN yum install -y gcc-c++ wget tar gzip git make && \
-    wget "https://go.dev/dl/$(curl 'https://go.dev/VERSION?m=text').linux-ppc64le.tar.gz" \
+    wget https://go.dev/dl/$(curl 'https://go.dev/VERSION?m=text').linux-ppc64le.tar.gz \
     rm -rf /usr/local/go \
     tar -C /usr/local -xf go*.linux-ppc64le.tar.gz \
     export GOROOT=/usr/local/go \
