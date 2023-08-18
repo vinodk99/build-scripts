@@ -47,7 +47,7 @@ git clone $PACKAGE_URL
 cd $PACKAGE_NAME/
 git checkout $PACKAGE_VERSION
 
-wget https://raw.githubusercontent.com/ppc64le/build-scripts/master/r/rules_rust/rules_rust_0.26.0.patch
+wget https://raw.githubusercontent.com/vinodk99/build-scripts/master/r/rules_rust/rules_rust_0.26.0.patch
 git apply rules_rust_0.26.0.patch
 
 if ! bazel build //... ; then
