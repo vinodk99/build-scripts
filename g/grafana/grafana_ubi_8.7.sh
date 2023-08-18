@@ -18,19 +18,15 @@
 # ----------------------------------------------------------------------------
 
 PACKAGE_NAME="grafana"
-PACKAGE_VERSION="${1:-v10.0.3}"
 PACKAGE_URL="https://github.com/grafana/grafana.git"
+PACKAGE_VERSION=
+export NODE_VERSION=${NODE_VERSION:-18}
 GO_VERSION=1.20.5
-NODE_VERSION=18.9.0
 
-yum update -y
-
-yum install -y wget git make sed gcc-c++ python38
-
+#install nodejs
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 source ~/.bashrc
 nvm install $NODE_VERSION
-npm install -g yarn
 
 #install go
 wget https://golang.org/dl/go$GO_VERSION.linux-ppc64le.tar.gz && \
@@ -39,12 +35,21 @@ rm -rf go$GO_VERSION.linux-ppc64le.tar.gz
 
 git clone $PACKAGE_URL
 cd $PACKAGE_NAME
-git checkout $PACKAGE_VERSION
+git checkout v10.0.3
 
-yarn install --immutable
+#Build frontend
+yarn install
+mkdir plugins-bundled/external
+export NODE_OPTIONS="--max-old-space-size=8192"
+make build-js
+
+#Build backend
 make gen-go
-go run build.go build
-go test -v ./pkg/...
-sed -i '148d' public/app/features/dashboard/components/ShareModal/SharePublicDashboard/SharePublicDashboard.test.tsx
-sed -i "148 i\    expect(screen.getByText('2022-08-30 00:00:00 to 2022-09-04 00:59:59')).toBeInTheDocument();" public/app/features/dashboard/components/ShareModal/SharePublicDashboard/SharePublicDashboard.test.tsx
+make deps-go
+make build-go
+
+#Test backend
+make test-go
+
+#Test backend
 yarn test --watchAll=false
