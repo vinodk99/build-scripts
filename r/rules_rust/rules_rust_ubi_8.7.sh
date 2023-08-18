@@ -57,7 +57,7 @@ if ! bazel build //... ; then
        exit 1
 fi
 
-if ! bazel test //...; then
+if ! bazel test //... ; then
       echo "------------------$PACKAGE_NAME::Build_and_Test_fails-------------------------"
       echo "$PACKAGE_URL $PACKAGE_NAME"
       echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub  | Pass |  Both_Build_and_Test_Fails"
