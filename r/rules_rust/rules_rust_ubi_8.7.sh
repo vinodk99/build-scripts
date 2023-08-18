@@ -19,7 +19,7 @@
 # ----------------------------------------------------------------------------
 
 PACKAGE_NAME=rules_rust
-PACKAGE_VERSION=${1:-0.26.0.}
+PACKAGE_VERSION=${1:-0.26.0}
 PACKAGE_URL=https://github.com/bazelbuild/rules_rust
 
 HOME_DIR=${PWD}
