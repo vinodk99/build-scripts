@@ -18,9 +18,9 @@
 # ----------------------------------------------------------------------------
 
 PACKAGE_NAME="grafana"
-PACKAGE_VERSION="${1:-v9.3.6}"
+PACKAGE_VERSION="${1:-v10.0.3}"
 PACKAGE_URL="https://github.com/grafana/grafana.git"
-GO_VERSION=1.19.6
+GO_VERSION=1.20.5
 
 yum update -y
 
@@ -30,8 +30,8 @@ curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-nvm install 18.9.0
-nvm use 18.9.0
+nvm install 18.17.0
+nvm use 18.17.0
 npm install -g yarn
 
 cd /
@@ -51,8 +51,7 @@ git checkout $PACKAGE_VERSION
 yarn install --immutable
 make gen-go
 go run build.go build
-go test -v ./pkg/...
-sed -i '148d' public/app/features/dashboard/components/ShareModal/SharePublicDashboard/SharePublicDashboard.test.tsx
-sed -i "148 i\    expect(screen.getByText('2022-08-30 00:00:00 to 2022-09-04 00:59:59')).toBeInTheDocument();" public/app/features/dashboard/components/ShareModal/SharePublicDashboard/SharePublicDashboard.test.tsx
+make test-go
+
 yarn test --watchAll=false
 
