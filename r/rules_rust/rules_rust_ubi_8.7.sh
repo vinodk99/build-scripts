@@ -48,7 +48,7 @@ cd $PACKAGE_NAME/
 git checkout $PACKAGE_VERSION
 
 wget https://raw.githubusercontent.com/ppc64le/build-scripts/master/r/rules_rust/rules_rust_0.26.0.patch
-git apply rules_rust_0.26.0.patch
+patch -p1 < rules_rust_0.26.0.patch
 
 if ! bazel build //... ; then
        echo "------------------$PACKAGE_NAME:Build_fails---------------------"
