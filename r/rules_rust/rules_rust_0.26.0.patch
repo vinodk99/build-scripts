@@ -139,7 +139,7 @@ index f6517d60..077300fc 100644
      "x86_64",
      "riscv32",
 diff --git a/rust/platform/triple.bzl b/rust/platform/triple.bzl
-index 2c993638..26a1c847 100644
+index 2c993638..8617abd7 100644
 --- a/rust/platform/triple.bzl
 +++ b/rust/platform/triple.bzl
 @@ -125,6 +125,10 @@ def _query_cpu_architecture(repository_ctx, expected_archs, is_windows = False):
