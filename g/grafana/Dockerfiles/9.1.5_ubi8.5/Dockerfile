@@ -1,7 +1,7 @@
-FROM registry.access.redhat.com/ubi8/ubi:8.4 as builder
+FROM registry.access.redhat.com/ubi8/ubi:8.7 as builder
 
-ARG GRAFANA_VERSION=v9.1.6
-ARG GO_VERSION=1.17 
+ARG GRAFANA_VERSION=v10.0.3
+ARG GO_VERSION=1.20.5
 
 ENV GOPATH=/grafana
 ENV PATH=$PATH:/usr/local/go/bin
@@ -19,8 +19,8 @@ RUN yum install -y python3 make && \
         export NVM_DIR="$HOME/.nvm" && \
         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm && \
         [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion && \
-        nvm install 18.9.0 && \
-        nvm use 18.9.0 && \
+        nvm install 18.17.0 && \
+        nvm use 18.17.0 && \
         npm install -g yarn
 
 RUN cd / && mkdir grafana && cd grafana && \
