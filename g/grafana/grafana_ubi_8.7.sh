@@ -19,7 +19,7 @@
 
 PACKAGE_NAME="grafana"
 PACKAGE_URL="https://github.com/grafana/grafana.git"
-PACKAGE_VERSION=
+PACKAGE_VERSION=v10.0.3
 export NODE_VERSION=${NODE_VERSION:-18}
 GO_VERSION=1.20.5
 
@@ -38,7 +38,7 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 git clone $PACKAGE_URL
 cd $PACKAGE_NAME
-git checkout v10.0.3
+git checkout $PACKAGE_VERSION
 
 #Build frontend
 npm install -g yarn
@@ -54,3 +54,7 @@ make build-go
 
 #Test backend
 make test-go
+
+#Test backend
+yarn test --watchAll=false
+
