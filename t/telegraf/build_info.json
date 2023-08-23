@@ -2,7 +2,7 @@
   "maintainer": "Vinod.K1@ibm.com",
   "package_name": "telegraf",
   "github_url": "https://github.com/influxdata/telegraf.git",
-  "version": "v1.24.4",
+  "version": "v1.27.4",
   "default_branch": "master",
   "package_dir": "t/telegraf/",
   "docker_cmd": "docker build -t ${package_name}:$PACKAGE_VERSION ${dir}",
@@ -10,6 +10,10 @@
   "v1.24.*": {
     "dir": "1.24.3-ubi8",
     "GO_VERSION": "1.19"
+  },
+  "v1.27.*": {
+    "dir": "1.24.3-ubi8",
+    "GO_VERSION": "1.20.5"
   },
   "1.10.*": {
     "dir": "1.10.4-ubi8"
