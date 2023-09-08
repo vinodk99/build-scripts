@@ -1,7 +1,7 @@
 FROM registry.access.redhat.com/ubi8/ubi:8.7 as builder
 
-ARG GRAFANA_VERSION=v10.0.3
-ARG GO_VERSION=1.20.5
+ARG GRAFANA_VERSION=v10.1.1
+ARG GO_VERSION=1.20.6
 
 ENV GOPATH=/grafana
 ENV PATH=$PATH:/usr/local/go/bin
