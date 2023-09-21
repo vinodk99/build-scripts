@@ -15,8 +15,8 @@ RUN wget https://archive.apache.org/dist/maven/maven-3/3.8.7/binaries/apache-mav
 
 
 RUN git clone https://github.com/swagger-api/swagger-core && \
-        cd swagger-core/ && \
-        git checkout $PACKAGE_VERSION && \
-        ./mvnw clean install
+    cd swagger-core/ && \
+    git checkout $PACKAGE_VERSION && \
+    ./mvnw clean install
 
 CMD ["/bin/bash"]
