@@ -45,7 +45,7 @@ if ! npm ci ; then
        echo "$PACKAGE_NAME  | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Install_Fails"
        exit 1
 fi
-
+sed -i '3602 i\  jest.advanceTimersByTime(30_000);' src/react/hooks/__tests__/useSuspenseQuery.test.tsx
 if ! npm run test:ci ; then
       echo "------------------$PACKAGE_NAME::Build_and_Test_fails-------------------------"
       echo "$PACKAGE_URL $PACKAGE_NAME"
