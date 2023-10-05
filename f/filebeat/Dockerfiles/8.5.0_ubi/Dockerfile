@@ -1,6 +1,6 @@
 FROM registry.access.redhat.com/ubi8/ubi as builder
 
-ARG GO_VERSION=1.18
+ARG GO_VERSION=1.20.6
 ARG PACKAGE_VERSION=v8.5.0
 
 RUN yum install -y wget gcc-c++ make git && \
