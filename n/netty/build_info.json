@@ -18,7 +18,7 @@
         "build_script" : "netty_build_ppc64le_rhel7.6.sh"
     },
     
-     "netty-4.1.94.Final" : {
+     "netty-4.1.*.Final" : {
         "build_script" : "netty-4.1.94.Final_ubi_8.7.sh"
     }
 
