@@ -23,7 +23,19 @@ PACKAGE_NAME=netty
 PACKAGE_URL=https://github.com/netty/netty
 PACKAGE_VERSION=${1:-netty-4.1.94.Final}
 
-yum install -y make maven git sudo wget gcc-c++ apr-devel perl go openssl-devel automake autoconf libtool libstdc++-static
+yum install -y make  git sudo wget gcc-c++ apr-devel perl go openssl-devel automake autoconf libtool libstdc++-static java-17-openjdk java-17-openjdk-devel java-17-openjdk-headless 
+
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+export PATH=$PATH:$JAVA_HOME/bin
+
+# Install maven.
+cd /opt/
+wget https://www-eu.apache.org/dist/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz
+tar xzf apache-maven-3.9.4-bin.tar.gz
+ln -s apache-maven-3.9.4 maven
+export MVN_HOME=/opt/maven
+export PATH=${MVN_HOME}/bin:${PATH}
+mvn -version
 
 wget https://github.com/Kitware/CMake/releases/download/v3.21.2/cmake-3.21.2.tar.gz
 tar -xvf cmake-3.21.2.tar.gz
@@ -43,13 +55,20 @@ cd ..
 #netty requires netty-tcnative binaries to build and test ,community made this changes to build netty-tcnative binaries,tried to build and test the netty-tcnative with the following link:https://github.com/linux-on-ibm-z/docs/wiki/Building-netty-tcnative
 git clone https://github.com/netty/netty-tcnative.git 
 cd netty-tcnative/
+#from version netty-4.1.94.Final it requires netty-tcnative netty-tcnative-parent-2.0.61.Final
 git checkout netty-tcnative-parent-2.0.61.Final
 sed -i '85,85 s/chromium-stable/patch-s390x-Jan2021/g' pom.xml
 sed -i '89,89 s/1ccef4908ce04adc6d246262846f3cd8a111fa44/d83fd4af80af244ac623b99d8152c2e53287b9ad/g' pom.xml
 sed -i '54,54 s/boringssl.googlesource.com/github.com\/linux-on-ibm-z/g' boringssl-static/pom.xml
 sed -i '55,55 s/chromium-stable/patch-s390x-Jan2021/g' boringssl-static/pom.xml
 ./mvnw clean install
-cd ..
+#for older version of netty it requires netty-tcnative netty-tcnative-parent-2.0.60.Final
+git checkout -f netty-tcnative-parent-2.0.61.Final
+sed -i '85,85 s/chromium-stable/patch-s390x-Jan2021/g' pom.xml
+sed -i '89,89 s/1ccef4908ce04adc6d246262846f3cd8a111fa44/d83fd4af80af244ac623b99d8152c2e53287b9ad/g' pom.xml
+sed -i '54,54 s/boringssl.googlesource.com/github.com\/linux-on-ibm-z/g' boringssl-static/pom.xml
+sed -i '55,55 s/chromium-stable/patch-s390x-Jan2021/g' boringssl-static/pom.xml
+./mvnw clean install
 
 git clone $PACKAGE_URL
 cd $PACKAGE_NAME
