@@ -23,7 +23,7 @@ PACKAGE_NAME=netty
 PACKAGE_URL=https://github.com/netty/netty
 PACKAGE_VERSION=${1:-netty-4.1.94.Final}
 
-yum install -y make  git sudo wget gcc-c++ apr-devel perl go openssl-devel automake autoconf libtool libstdc++-static java-17-openjdk java-17-openjdk-devel java-17-openjdk-headless 
+yum install -y make cmake git sudo wget gcc-c++ apr-devel perl go openssl-devel automake autoconf libtool libstdc++-static java-17-openjdk java-17-openjdk-devel java-17-openjdk-headless 
 
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export PATH=$PATH:$JAVA_HOME/bin
@@ -37,13 +37,13 @@ export MVN_HOME=/opt/maven
 export PATH=${MVN_HOME}/bin:${PATH}
 mvn -version
 
-wget https://github.com/Kitware/CMake/releases/download/v3.21.2/cmake-3.21.2.tar.gz
-tar -xvf cmake-3.21.2.tar.gz
-cd cmake-3.21.2
-./bootstrap
-make
-make install
-cd ..
+#wget https://github.com/Kitware/CMake/releases/download/v3.21.2/cmake-3.21.2.tar.gz
+#tar -xvf cmake-3.21.2.tar.gz
+#cd cmake-3.21.2
+#./bootstrap
+#make
+#make install
+#cd ..
 
 git clone https://github.com/ninja-build/ninja.git && cd ninja
 git checkout v1.10.2
