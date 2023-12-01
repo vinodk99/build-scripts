@@ -1,8 +1,8 @@
 diff --git a/docs/sphinx/requirements_linux.txt b/docs/sphinx/requirements_linux.txt
-index 5e3fd19..307af63 100644
+index 5e3fd19..e4e6771 100644
 --- a/docs/sphinx/requirements_linux.txt
 +++ b/docs/sphinx/requirements_linux.txt
-@@ -195,47 +195,8 @@ pygments==2.15.0 \
+@@ -195,47 +195,10 @@ pygments==2.15.0 \
      --hash=sha256:77a3299119af881904cd5ecd1ac6a66214b6e9bed1f2db16993b54adede64094 \
      --hash=sha256:f7e36cffc4c517fbc252861b9a6e4644ca0e5abadf9a113c72d1358ad09b9500
      # via sphinx
@@ -48,6 +48,8 @@ index 5e3fd19..307af63 100644
 -    --hash=sha256:e61ceaab6f49fb8bdfaa0f92c4b57bcfbea54c09277b1b4f7ac376bfb7a7c174 \
 -    --hash=sha256:f84fbc98b019fef2ee9a1cb3ce93e3187a6df0b2538a651bfb890254ba9f90b5
 +pyyaml==6.0.1 \
++    --hash=sha256:5773183b6446b2c99bb77e77595dd486303b4faab2b086e7b17bc6bef28865f6 \
++    --hash=sha256:a0cd17c15d3bb3fa06978b4e8958dcdc6e0174ccea823003a106c7d4d7899ac5 \
 +    --hash=sha256:bfdf460b1736c775f2ba9f6a92bca30bc2095067b8a9d77876d1fad6cc3b4a43
      # via myst-parser
  readthedocs-sphinx-ext==2.2.3 \
