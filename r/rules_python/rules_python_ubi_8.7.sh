@@ -51,7 +51,7 @@ source $HOME/.cargo/env
 rustc --version
 
 #Apply patch
-wget https://raw.githubusercontent.com/vinodk99/build-scripts/rules_python_fork/r/rules_python%20/rules_python_0.27.1.patch
+wget https://raw.githubusercontent.com/vinodk99/build-scripts/rules_python1/r/rules_python/rules_python_0.27.1.patch
 patch -p1 < rules_python_0.27.1.patch
 
 # Install
