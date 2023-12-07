@@ -51,8 +51,8 @@ sudo git checkout $PACKAGE_VERSION
 
 sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
 PATH="$HOME/.cargo/bin:$PATH"
-source $HOME/.cargo/env
-rustc --version
+sudo source $HOME/.cargo/env
+sudo rustc --version
 
 #Apply patch
 sudo wget https://raw.githubusercontent.com/vinodk99/build-scripts/rules_python1/r/rules_python/rules_python_0.27.1.patch
