@@ -22,43 +22,46 @@ PACKAGE_NAME="rules_python"
 PACKAGE_VERSION=${1:-"0.27.1"}
 PACKAGE_URL=https://github.com/bazelbuild/rules_python
 
+# Create a non-root user
+sudo useradd -m -s /bin/bash user1
+sudo passwd user1
+sudo usermod -aG sudo user1
+
+# Set up permissions
+sudo chown -R user1:user1 /home  # Adjust path as needed
+
 # Install dependencies
-yum install -y git make wget gcc-c++ java-11-openjdk java-11-openjdk-devel java-11-openjdk-headless gcc zip diffutils protobuf-c patch gcc-gfortran openssl-devel openssl python3.11-pip python3.11 python3.11-devel sudo
+sudo yum install -y git make wget gcc-c++ java-11-openjdk java-11-openjdk-devel java-11-openjdk-headless gcc zip diffutils protobuf-c patch gcc-gfortran openssl-devel openssl python3.11-pip python3.11 python3.11-devel sudo
+
+# Switch to the non-root user
+su - user1 
 
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 export PATH=$PATH:$JAVA_HOME/bin
 
-# creating non-root user
-USERNAME="user1"
-useradd -m -s /bin/bash "$USERNAME"
-usermod -aG wheel "$USERNAME"
-passwd "$USERNAME"
-su - "$USERNAME"
-
-#install bazel
-sudo wget https://github.com/bazelbuild/bazel/releases/download/6.4.0/bazel-6.4.0-dist.zip
-sudo mkdir -p  bazel-6.4.0
-sudo unzip bazel-6.4.0-dist.zip -d bazel-6.4.0/
+wget https://github.com/bazelbuild/bazel/releases/download/6.4.0/bazel-6.4.0-dist.zip
+mkdir -p bazel-6.4.0
+unzip bazel-6.4.0-dist.zip -d bazel-6.4.0/
 cd bazel-6.4.0/
-export EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" bash
-sudo ./compile.sh
-#export the path of bazel bin
+export EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk"
+bash compile.sh
 export PATH=$PATH:`pwd`/output
 cd ../
 
-# clone the repository
-sudo git clone $PACKAGE_URL
+  # Clone the repository
+git clone $PACKAGE_URL
 cd $PACKAGE_NAME
-sudo git checkout $PACKAGE_VERSION
+git checkout $PACKAGE_VERSION
 
-sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
+#install rustc
+curl https://sh.rustup.rs -sSf | sh -s -- -y
 PATH="$HOME/.cargo/bin:$PATH"
 source $HOME/.cargo/env
-sudo rustc --version
+rustc --version
 
 #Apply patch
-sudo wget https://raw.githubusercontent.com/vinodk99/build-scripts/rules_python1/r/rules_python/rules_python_0.27.1.patch
-sudo patch -p1 < rules_python_0.27.1.patch
+wget https://raw.githubusercontent.com/vinodk99/build-scripts/rules_python1/r/rules_python/rules_python_0.27.1.patch
+patch -p1 < rules_python_0.27.1.patch
 
 # Install
 if ! bazel build //... ; then
