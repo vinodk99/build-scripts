@@ -51,7 +51,7 @@ sudo git checkout $PACKAGE_VERSION
 
 sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
 PATH="$HOME/.cargo/bin:$PATH"
-sudo source $HOME/.cargo/env
+source $HOME/.cargo/env
 sudo rustc --version
 
 #Apply patch
