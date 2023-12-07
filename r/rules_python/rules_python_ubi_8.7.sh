@@ -31,7 +31,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 # creating non-root user
 USERNAME="user1"
 useradd -m -s /bin/bash "$USERNAME"
-usermod -aG sudo "$USERNAME"
+usermod -aG wheel "$USERNAME"
 passwd "$USERNAME"
 su - "$USERNAME"
 
