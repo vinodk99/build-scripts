@@ -126,6 +126,21 @@ index 5caf762..6355538 100644
 
      py_test(
          name = name + "_test",
+diff --git a/python/repositories.bzl b/python/repositories.bzl
+index 37cc34e..e302c36 100644
+--- a/python/repositories.bzl
++++ b/python/repositories.bzl
+@@ -216,10 +216,6 @@ def _python_repository_impl(rctx):
+                         exec_result.stderr,
+                     ))
+                 uid = int(exec_result.stdout.strip())
+-                if uid == 0:
+-                    fail("The current user is root, please run as non-root when using the hermetic Python interpreter. See https://github.com/bazelbuild/rules_python/pull/713.")
+-                else:
+-                    fail("The current user has CAP_DAC_OVERRIDE set, please drop this capability when using the hermetic Python interpreter. See https://github.com/bazelbuild/rules_python/pull/713.")
+
+     python_bin = "python.exe" if ("windows" in platform) else "bin/python3"
+
 diff --git a/tools/private/update_deps/update_coverage_deps.py b/tools/private/update_deps/update_coverage_deps.py
 index 72baa44..1e11043 100755
 --- a/tools/private/update_deps/update_coverage_deps.py
