@@ -28,31 +28,34 @@ yum install -y git make wget gcc-c++ java-11-openjdk java-11-openjdk-devel java-
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 export PATH=$PATH:$JAVA_HOME/bin
 
+sudo useradd -r user1
+sudo chown -R user1
+sudo -u user1 
 #install bazel
 #install bazel
-wget https://github.com/bazelbuild/bazel/releases/download/6.4.0/bazel-6.4.0-dist.zip
-mkdir -p  bazel-6.4.0
-unzip bazel-6.4.0-dist.zip -d bazel-6.4.0/
+sudo wget https://github.com/bazelbuild/bazel/releases/download/6.4.0/bazel-6.4.0-dist.zip
+sudo mkdir -p  bazel-6.4.0
+sudo unzip bazel-6.4.0-dist.zip -d bazel-6.4.0/
 cd bazel-6.4.0/
 export EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" bash
-./compile.sh
+sudo ./compile.sh
 #export the path of bazel bin
 export PATH=$PATH:`pwd`/output
 cd ../
 
 # clone the repository
-git clone $PACKAGE_URL
+sudo git clone $PACKAGE_URL
 cd $PACKAGE_NAME
-git checkout $PACKAGE_VERSION
+sudo git checkout $PACKAGE_VERSION
 
-curl https://sh.rustup.rs -sSf | sh -s -- -y
+sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
 PATH="$HOME/.cargo/bin:$PATH"
 source $HOME/.cargo/env
 rustc --version
 
 #Apply patch
-wget https://raw.githubusercontent.com/vinodk99/build-scripts/rules_python1/r/rules_python/rules_python_0.27.1.patch
-patch -p1 < rules_python_0.27.1.patch
+sudo wget https://raw.githubusercontent.com/vinodk99/build-scripts/rules_python1/r/rules_python/rules_python_0.27.1.patch
+sudo patch -p1 < rules_python_0.27.1.patch
 
 # Install
 if ! bazel build //... ; then
