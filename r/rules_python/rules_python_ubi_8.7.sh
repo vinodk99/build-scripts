@@ -28,10 +28,11 @@ yum install -y git make wget gcc-c++ java-11-openjdk java-11-openjdk-devel java-
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 export PATH=$PATH:$JAVA_HOME/bin
 
-sudo useradd -r user1
-sudo chown -R user1
-sudo -u user1 
-#install bazel
+# creating non-root user
+useradd -p "" -G wheel user1
+sudo -i -u ubi bash <<EOF
+set -e 
+
 #install bazel
 sudo wget https://github.com/bazelbuild/bazel/releases/download/6.4.0/bazel-6.4.0-dist.zip
 sudo mkdir -p  bazel-6.4.0
