@@ -29,9 +29,11 @@ export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 export PATH=$PATH:$JAVA_HOME/bin
 
 # creating non-root user
-useradd -p "" -G wheel user1
-sudo -i -u user1 bash <<EOF
-set -e 
+USERNAME="user1"
+useradd -m -s /bin/bash "$USERNAME"
+usermod -aG sudo "$USERNAME"
+passwd "$USERNAME"
+su - "$USERNAME"
 
 #install bazel
 sudo wget https://github.com/bazelbuild/bazel/releases/download/6.4.0/bazel-6.4.0-dist.zip
