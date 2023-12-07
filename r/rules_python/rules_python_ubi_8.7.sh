@@ -25,7 +25,7 @@ PACKAGE_URL=https://github.com/bazelbuild/rules_python
 # Create a non-root user
 sudo useradd -m -s /bin/bash user1
 echo -e "user1\nuser1" | sudo passwd user1 --stdin
-sudo usermod -aG sudo user1
+sudo usermod -aG wheel user1
 
 # Set up permissions
 sudo chown -R user1:user1 /home  # Adjust path as needed
