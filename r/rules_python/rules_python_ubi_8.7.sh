@@ -30,7 +30,7 @@ export PATH=$PATH:$JAVA_HOME/bin
 
 # creating non-root user
 useradd -p "" -G wheel user1
-sudo -i -u ubi bash <<EOF
+sudo -i -u user1 bash <<EOF
 set -e 
 
 #install bazel
