@@ -34,8 +34,8 @@ nvm use $NODE_VERSION
 git clone $PACKAGE_URL $PACKAGE_NAME
 cd  $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
-pip3 install pytest
 python3 -m pip install --upgrade pip
+pip3 install pytest
 
 if ! pip3 install file://$PWD/python/ipywidgets#egg=ipywidgets[test]; then
     echo "------------------$PACKAGE_NAME:install_fails-------------------------------------"
