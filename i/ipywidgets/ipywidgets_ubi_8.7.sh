@@ -36,7 +36,7 @@ cd  $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 python3 -m pip install --upgrade pip
 
-if ! pip install file://$PWD/python/ipywidgets#egg=ipywidgets[test] ; then
+if ! pip3 install file://$PWD/python/ipywidgets#egg=ipywidgets[test] ; then
     echo "------------------$PACKAGE_NAME:install_fails-------------------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_Fails"
