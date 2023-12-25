@@ -42,7 +42,6 @@ if ! pip3 install file://$PWD/python/ipywidgets#egg=ipywidgets[test] ; then
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_Fails"
     exit 1
 fi
-pip3 install pytest
 cd python/ipywidgets
 if ! pytest; then
     echo "------------------$PACKAGE_NAME:install_success_but_test_fails---------------------"
