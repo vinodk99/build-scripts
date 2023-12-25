@@ -35,9 +35,9 @@ git clone $PACKAGE_URL $PACKAGE_NAME
 cd  $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 python3 -m pip install --upgrade pip
-python3 -m pip install -e .
- 
-if ! pip3 install file://$PWD/python/ipywidgets#egg=ipywidgets[test]; then
+pip3 install pytest
+
+if ! pip3 install file://$PWD/python/ipywidgets then
     echo "------------------$PACKAGE_NAME:install_fails-------------------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_Fails"
