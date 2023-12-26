@@ -22,7 +22,7 @@ PACKAGE_VERSION=${1:-8.1.1}
 PACKAGE_URL=https://github.com/jupyter-widgets/ipywidgets
 
 export NODE_VERSION=${NODE_VERSION:-16}
-yum install -y python38 python38-devel python38-pip git gcc gcc-c++ libffi make
+yum install -y python38 python38-devel python38-pip git gcc gcc-c++ libffi make python3-pytest
 
 #Installing nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
@@ -42,7 +42,6 @@ if ! pip3 install file://$PWD/python/ipywidgets#egg=ipywidgets[test] ;  then
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_Fails"
     exit 1
 fi
-pip3 install pytest
 cd python/ipywidgets
 if ! pytest --cov=ipywidgets ipywidgets ; then
     echo "------------------$PACKAGE_NAME:install_success_but_test_fails---------------------"
