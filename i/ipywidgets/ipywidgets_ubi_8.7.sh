@@ -42,7 +42,7 @@ git clone $PACKAGE_URL $PACKAGE_NAME
 cd  $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 python -m pip install -U pip
-python -m pip install numpy pytest
+python -m pip install  pytest
 
 if ! pip install file://$PWD/python/ipywidgets#egg=ipywidgets[test] ;  then
     echo "------------------$PACKAGE_NAME:install_fails-------------------------------------"
