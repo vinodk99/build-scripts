@@ -22,7 +22,7 @@ PACKAGE_VERSION=${1:-8.1.1}
 PACKAGE_URL=https://github.com/jupyter-widgets/ipywidgets
 
 export NODE_VERSION=${NODE_VERSION:-16}
-yum install -y python38 python38-devel python38-pip git gcc gcc-c++ libffi make python3-pytest
+yum install -y python38 python38-devel python38-pip git gcc gcc-c++ libffi make 
 
 #Installing nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
@@ -31,12 +31,20 @@ echo "installing nodejs $NODE_VERSION"
 nvm install "$NODE_VERSION" >/dev/null
 nvm use $NODE_VERSION
 
+#Install miniconda
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-ppc64le.sh
+sh Miniconda3-latest-Linux-ppc64le.sh -u -b -p $HOME/conda
+$HOME/conda/bin/conda update -y -n base conda
+export PATH=$HOME/conda/bin/:$PATH
+conda --version
+
 git clone $PACKAGE_URL $PACKAGE_NAME
 cd  $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
-python3 -m pip install --upgrade pip
+python -m pip install -U pip
+python -m pip install numpy pytest
 
-if ! pip3 install file://$PWD/python/ipywidgets#egg=ipywidgets[test] ;  then
+if ! pip install file://$PWD/python/ipywidgets#egg=ipywidgets[test] ;  then
     echo "------------------$PACKAGE_NAME:install_fails-------------------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_Fails"
