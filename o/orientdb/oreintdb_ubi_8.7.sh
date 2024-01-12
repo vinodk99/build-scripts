@@ -45,7 +45,14 @@ git clone $PACKAGE_URL
 cd $PACKAGE_NAME/
 git checkout $PACKAGE_VERSION
 
-if ! mvn -B package --file pom.xml ; then
+if ! mvn clean install -DskipTests ; then
+    echo "------------------$PACKAGE_NAME:Install_fails-------------------------------------"
+    echo "$PACKAGE_URL $PACKAGE_NAME"
+    echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_Fails"
+    exit 1
+fi
+
+if ! mvn test ; then
     echo "------------------$PACKAGE_NAME:Install_success_but_test_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_success_but_test_Fails"
