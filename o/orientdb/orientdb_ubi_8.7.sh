@@ -2,7 +2,7 @@
 # ----------------------------------------------------------------------------
 #
 # Package       : orientdb
-# Version       : 3.2.26
+# Version       : 3.2.27
 # Source repo   : https://github.com/orientechnologies/orientdb.git
 # Tested on     : UBI: 8.7
 # Language      : Java
@@ -20,7 +20,7 @@
 # ----------------------------------------------------------------------------
 
 PACKAGE_NAME=orientdb
-PACKAGE_VERSION=${1:-3.2.26}
+PACKAGE_VERSION=${1:-3.2.27}
 PACKAGE_URL=https://github.com/orientechnologies/orientdb.git
 
 yum install -y git wget tar openssl-devel freetype fontconfig
