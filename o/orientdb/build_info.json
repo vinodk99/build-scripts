@@ -11,7 +11,7 @@
     "docker_build": "true",
 
     "3.*.*" : {
-       "dir": "3.2.26_ubi8",
+       "dir": "3.2.27_ubi8",
        "build_script": "orientdb_ubi_8.7.sh"
     }
 }
