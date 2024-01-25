@@ -2,7 +2,7 @@
     "maintainer":"Vinod.K1@ibm.com",
     "package_name" : "orientdb",
     "github_url": "https://github.com/orientechnologies/orientdb",
-    "version": "3.2.26",
+    "version": "3.2.27",
     "default_branch": "develop",
     "package_dir": "o/orientdb",
     "build_script": "orientdb_ubi_8.7.sh",
