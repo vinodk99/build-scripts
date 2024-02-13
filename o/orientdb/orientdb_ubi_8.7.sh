@@ -28,17 +28,17 @@ HOME_DIR=${PWD}
 cd $HOME_DIR
 
 #install java
-wget https://github.com/ibmruntimes/semeru11-certified-binaries/releases/download/jdk-11.0.18%2B10_openj9-0.36.1/ibm-semeru-certified-jdk_ppc64le_linux_11.0.18.0.tar.gz
-tar -zxf ibm-semeru-certified-jdk_ppc64le_linux_11.0.18.0.tar.gz
-export JAVA_HOME=$HOME_DIR/jdk-11.0.18+10
+wget https://github.com/ibmruntimes/semeru21-binaries/releases/download/jdk-21%2B35_openj9-0.42.0-m0/ibm-semeru-open-jdk_ppc64le_linux_21_35_openj9-0.42.0-m0.tar.gz
+tar -zxf ibm-semeru-open-jdk_ppc64le_linux_21_35_openj9-0.42.0-m0.tar.gz
+export JAVA_HOME=$HOME_DIR/jdk-21+35_openj9-0.42.0-m0
 export PATH=$JAVA_HOME/bin:$PATH
 java -version
 
 #install maven
-wget https://archive.apache.org/dist/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
-tar -zxf apache-maven-3.8.7-bin.tar.gz
-cp -R apache-maven-3.8.7 /usr/local
-ln -s /usr/local/apache-maven-3.8.7/bin/mvn /usr/bin/mvn
+wget https://archive.apache.org/dist/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
+tar -zxf apache-maven-3.9.6-bin.tar.gz
+cp -R apache-maven-3.9.6 /usr/local
+ln -s /usr/local/apache-maven-3.9.6/bin/mvn /usr/bin/mvn
 
 cd $HOME_DIR
 git clone $PACKAGE_URL
