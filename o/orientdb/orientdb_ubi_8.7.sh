@@ -30,7 +30,7 @@ cd $HOME_DIR
 #install java
 wget https://github.com/ibmruntimes/semeru21-binaries/releases/download/jdk-21%2B35_openj9-0.42.0-m0/ibm-semeru-open-jdk_ppc64le_linux_21_35_openj9-0.42.0-m0.tar.gz
 tar -zxf ibm-semeru-open-jdk_ppc64le_linux_21_35_openj9-0.42.0-m0.tar.gz
-export JAVA_HOME=$HOME_DIR/jdk-21+35_openj9-0.42.0-m0
+export JAVA_HOME=$HOME_DIR/jdk-21+35
 export PATH=$JAVA_HOME/bin:$PATH
 java -version
 
