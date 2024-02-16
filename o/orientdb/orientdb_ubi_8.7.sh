@@ -28,9 +28,9 @@ HOME_DIR=${PWD}
 cd $HOME_DIR
 
 #install java
-wget https://github.com/ibmruntimes/semeru19-binaries/releases/download/jdk-19.0.2%2B7_openj9-0.37.0/ibm-semeru-open-jdk_ppc64le_linux_19.0.2_7_openj9-0.37.0.tar.gz
-tar -zxf ibm-semeru-open-jdk_ppc64le_linux_19.0.2_7_openj9-0.37.0.tar.gz
-export JAVA_HOME=$HOME_DIR/jdk-19.0.2+7
+wget https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9/OpenJDK17U-jdk_ppc64le_linux_hotspot_17.0.9_9.tar.gz
+tar -zxf OpenJDK17U-jdk_ppc64le_linux_hotspot_17.0.9_9.tar.gz
+export JAVA_HOME=$HOME_DIR/jdk-17.0.9+9
 export PATH=$JAVA_HOME/bin:$PATH
 java -version
 
@@ -45,7 +45,7 @@ git clone $PACKAGE_URL
 cd $PACKAGE_NAME/
 git checkout $PACKAGE_VERSION
 
-if ! mvn -B package --file pom.xml ; then
+if ! mvn -B package --file pom.xml -Xmx1024m ; then
     echo "------------------$PACKAGE_NAME:Install_success_but_test_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_success_but_test_Fails"
