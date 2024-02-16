@@ -28,9 +28,9 @@ HOME_DIR=${PWD}
 cd $HOME_DIR
 
 #install java
-wget https://github.com/ibmruntimes/semeru21-binaries/releases/download/jdk-21%2B35_openj9-0.42.0-m0/ibm-semeru-open-jdk_ppc64le_linux_21_35_openj9-0.42.0-m0.tar.gz
-tar -zxf ibm-semeru-open-jdk_ppc64le_linux_21_35_openj9-0.42.0-m0.tar.gz
-export JAVA_HOME=$HOME_DIR/jdk-21+35
+wget https://github.com/ibmruntimes/semeru19-binaries/releases/download/jdk-19.0.2%2B7_openj9-0.37.0/ibm-semeru-open-jdk_ppc64le_linux_19.0.2_7_openj9-0.37.0.tar.gz
+tar -zxf ibm-semeru-open-jdk_ppc64le_linux_19.0.2_7_openj9-0.37.0.tar.gz
+export JAVA_HOME=$HOME_DIR/jdk-19.0.2+7
 export PATH=$JAVA_HOME/bin:$PATH
 java -version
 
