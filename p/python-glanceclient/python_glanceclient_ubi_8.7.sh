@@ -3,7 +3,7 @@
 #
 # Package       : python-glanceclient
 # Version       : yoga-eom
-# Source repo   : https://github.com/openstack/python-glanceclient
+# Source repo   : https://github.com/openstack/python-glanceclient 
 # Tested on     : UBI 8.7
 # Language      : Python
 # Travis-Check  : True
