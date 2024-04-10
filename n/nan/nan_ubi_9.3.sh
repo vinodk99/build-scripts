@@ -1,6 +1,5 @@
 #!/bin/bash -e
 # -----------------------------------------------------------------------------
-#
 # Package       :nan
 # Version       :v2.19.0
 # Source repo   :https://github.com/nodejs/nan
