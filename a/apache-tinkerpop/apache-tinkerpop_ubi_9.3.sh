@@ -29,6 +29,13 @@ yum install -y git make wget gcc-c++ java-11-openjdk java-11-openjdk-devel java-
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 export PATH=$PATH:$JAVA_HOME/bin
 
+export NODE_VERSION=${NODE_VERSION:-16}
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+source "$HOME"/.bashrc
+echo "installing nodejs $NODE_VERSION"
+nvm install "$NODE_VERSION" >/dev/null
+nvm use $NODE_VERSION
+
 wget https://archive.apache.org/dist/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
 tar -zxf apache-maven-3.8.7-bin.tar.gz
 cp -R apache-maven-3.8.7 /usr/local
