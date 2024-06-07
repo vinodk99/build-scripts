@@ -33,6 +33,7 @@ git checkout v3.17.3
 make
 make install
 cd ..
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 
 #install protoc-c
 git clone https://github.com/protobuf-c/protobuf-c
