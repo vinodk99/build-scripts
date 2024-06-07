@@ -1,3 +1,4 @@
+# Variables
 PACKAGE_NAME=influxdb
 PACKAGE_VERSION=${1:-v2.7.6}
 PACKAGE_URL=https://github.com/influxdata/influxdb
@@ -51,8 +52,11 @@ make
 make install
 cd ..
 
+# Find the directory containing `flux.pc`
+FLUX_PC_PATH=$(find /usr/local -name flux.pc | xargs dirname)
+
 # Update PKG_CONFIG_PATH for flux
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=$FLUX_PC_PATH:$PKG_CONFIG_PATH
 
 # Clone InfluxDB repository and checkout the specified version
 git clone $PACKAGE_URL
