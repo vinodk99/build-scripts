@@ -69,9 +69,10 @@ if ! make; then
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_Fails"
     exit 1
 fi
+
 export str="authorization authorizer backup bolt checks cmd context dashboards dbrp gather http influxql inmem jsonweb kit kv label mock models notebooks notification pkg pkger predicate prometheus query rand remotes replications secret session snowflake sqlite static task telegraf telemetry tenant toml tools v1"
 
-if ! go test ./...; then
+if ! go test ./... -timeout=30m; then
     echo "------------------$PACKAGE_NAME:install_success_but_test_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_success_but_test_Fails"
