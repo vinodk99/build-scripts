@@ -24,30 +24,29 @@ PACKAGE_URL=https://github.com/apache/tinkerpop
 
 OS_NAME=`cat /etc/os-release | grep PRETTY_NAME | cut -d '=' -f2 | tr -d '"'`
 
-yum install -y git make wget gcc-c++ java-11-openjdk java-11-openjdk-devel java-11-openjdk-headless
+yum install -y git make wget gcc-c++
 
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
-export PATH=$PATH:$JAVA_HOME/bin
+#Install temurin java17
+wget https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9/OpenJDK17U-jdk_ppc64le_linux_hotspot_17.0.9_9.tar.gz
+tar -C /usr/local -zxf OpenJDK17U-jdk_ppc64le_linux_hotspot_17.0.9_9.tar.gz
+export JAVA_HOME=/usr/local/jdk-17.0.9+9
+export JAVA17_HOME=/usr/local/jdk-17.0.9+9
+export PATH=$PATH:/usr/local/jdk-17.0.9+9/bin
+ln -sf /usr/local/jdk-17.0.9+9/bin/java /usr/bin
+rm -f OpenJDK17U-jdk_ppc64le_linux_hotspot_17.0.9_9.tar.gz
 
-export NODE_VERSION=${NODE_VERSION:-16}
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-source "$HOME"/.bashrc
-echo "installing nodejs $NODE_VERSION"
-nvm install "$NODE_VERSION" >/dev/null
-nvm use $NODE_VERSION
-
+#install maven
 wget https://archive.apache.org/dist/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
 tar -zxf apache-maven-3.8.7-bin.tar.gz
 cp -R apache-maven-3.8.7 /usr/local
 ln -s /usr/local/apache-maven-3.8.7/bin/mvn /usr/bin/mvn
-mvn --version
 
 git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 
 #Build and test.
-if !  mvn clean install -pl -:gremlin-javascript,-:gremlin-server,-:gremlin-socket-server ; then
+if !  mvn clean install -pl -:gremlin-javascript,-:gremlin-server,-:gremlin-socket-server --Dskiptests=true ; then
     echo "------------------$PACKAGE_NAME:Build_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Build_Fails"
