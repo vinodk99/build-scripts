@@ -24,29 +24,28 @@ PACKAGE_URL=https://github.com/apache/tinkerpop
 
 OS_NAME=`cat /etc/os-release | grep PRETTY_NAME | cut -d '=' -f2 | tr -d '"'`
 
-yum install -y git make wget gcc-c++
+yum install -y git wget tar openssl-devel freetype fontconfig
 
-#Install temurin java17
-wget https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9/OpenJDK17U-jdk_ppc64le_linux_hotspot_17.0.9_9.tar.gz
-tar -C /usr/local -zxf OpenJDK17U-jdk_ppc64le_linux_hotspot_17.0.9_9.tar.gz
-export JAVA_HOME=/usr/local/jdk-17.0.9+9
-export JAVA17_HOME=/usr/local/jdk-17.0.9+9
-export PATH=$PATH:/usr/local/jdk-17.0.9+9/bin
-ln -sf /usr/local/jdk-17.0.9+9/bin/java /usr/bin
-rm -f OpenJDK17U-jdk_ppc64le_linux_hotspot_17.0.9_9.tar.gz
+wget https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.22%2B7/OpenJDK11U-jdk_ppc64le_linux_hotspot_11.0.22_7.tar.gz
+tar -C /usr/local -xzf OpenJDK11U-jdk_ppc64le_linux_hotspot_11.0.22_7.tar.gz
+export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
+export JAVA_HOME=/usr/local/jdk-11.0.22+7/
+export PATH=$PATH:/usr/local/jdk-11.0.22+7/bin
+ln -sf /usr/local/jdk-11.0.22+7/bin/java /usr/bin/
+rm -rf OpenJDK11U-jdk_ppc64le_linux_hotspot_11.0.22_7.tar.gz
 
 #install maven
-wget https://archive.apache.org/dist/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
-tar -zxf apache-maven-3.8.7-bin.tar.gz
-cp -R apache-maven-3.8.7 /usr/local
-ln -s /usr/local/apache-maven-3.8.7/bin/mvn /usr/bin/mvn
+wget https://archive.apache.org/dist/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
+tar -zxf apache-maven-3.8.8-bin.tar.gz
+cp -R apache-maven-3.8.8 /usr/local
+ln -s /usr/local/apache-maven-3.8.8/bin/mvn /usr/bin/mvn
 
 git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 
 #Build and test.
-if !  mvn clean install -pl -:gremlin-javascript,-:gremlin-server,-:gremlin-socket-server -Dskiptests=true ; then
+if !  mvn clean install -pl -:gremlin-javascript,-:gremlin-server,-:gremlin-socket-server ; then
     echo "------------------$PACKAGE_NAME:Build_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Build_Fails"
