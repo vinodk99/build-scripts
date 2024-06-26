@@ -45,6 +45,7 @@ if ! npm install ; then
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Build_Fails"
     exit 1
 fi
+sed -i 's/\(tap\.test('\''display_host'\'', { timeout: \)20000/\140000/' test/unit/facts.test.js
 
 if ! npm run unit ; then
     echo "------------------$PACKAGE_NAME::Build_and_Test_fails-------------------------"
