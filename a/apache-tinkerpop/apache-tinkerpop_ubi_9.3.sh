@@ -45,7 +45,7 @@ cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 
 #Build and test.
-if !  mvn clean install -pl -:gremlin-javascript,-:gremlin-server,-:gremlin-socket-server ; then
+if !  mvn clean install -pl -:gremlin-javascript,-:gremlin-server,-:gremlin-socket-server,-:gremlint ; then
     echo "------------------$PACKAGE_NAME:Build_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Build_Fails"
@@ -54,7 +54,7 @@ fi
 
 #For testing skipping some modules for test because these modules require docker to be install inside the container.
 
-if ! mvn verify -pl -:gremlin-javascript,-:gremlin-server,-:gremlin-archetype-tinkergraph,-:gremlin-archetype-server,-:gremlin-archetype-dsl ; then
+if ! mvn verify -pl -:gremlin-javascript,-:gremlin-server,-:gremlin-archetype-tinkergraph,-:gremlin-archetype-server,-:gremlin-archetype-dsl,-:gremlint ; then
     echo "------------------$PACKAGE_NAME::Build_and_Test_fails-------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub  | Fail|  Build_and_Test_fails"
