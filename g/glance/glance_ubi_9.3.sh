@@ -22,7 +22,7 @@ PACKAGE_VERSION=${1:-zed-eom}
 PACKAGE_URL=https://github.com/openstack/glance
 
 yum install openssl openssl-devel -y
-yum install -y git wget gcc gcc-c++ python3 python3-pip python3-devel python3-psycopg2 libxslt libxslt-devel make libpq libpq-devel cmake xz libaio  ninja-build glib2 glib2-devel bzip2 pkgconfig
+yum install -y git wget gcc gcc-c++ python3 python3-pip python3-devel python3-psycopg2 libxslt libxslt-devel make libpq libpq-devel cmake xz libaio  ninja-build glib2 glib2-devel bzip2 pkgconfig diffutils
 
 wget https://rpmfind.net/linux/centos-stream/9-stream/AppStream/ppc64le/os/Packages/pixman-0.40.0-5.el9.ppc64le.rpm
 rpm -i pixman-0.40.0-5.el9.ppc64le.rpm
