@@ -21,20 +21,8 @@ PACKAGE_NAME=glance
 PACKAGE_VERSION=${1:-zed-eom}
 PACKAGE_URL=https://github.com/openstack/glance
 
-yum install -y yum-utils wget
-yum update -y --allowerasing
-dnf config-manager --add-repo https://mirror.stream.centos.org/9-stream/AppStream/ppc64le/os/
-dnf config-manager --add-repo https://mirror.stream.centos.org/9-stream/BaseOS/ppc64le/os/
-dnf config-manager --add-repo https://mirror.stream.centos.org/9-stream/CRB/ppc64le/os/
-wget http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-Official
-mv RPM-GPG-KEY-CentOS-Official /etc/pki/rpm-gpg/.
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-Official
-dnf install --nodocs -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
-
-yum clean all
-yum install -y openssl-libs
-
-yum install -y git wget gcc gcc-c++ python3 python3-pip python3-devel python3-psycopg2 libxslt libxslt-devel make libpq libpq-devel openssl-devel cmake xz libaio  ninja-build glib2 glib2-devel bzip2 pkgconfig
+yum install openssl openssl-devel -y
+yum install -y git wget gcc gcc-c++ python3 python3-pip python3-devel python3-psycopg2 libxslt libxslt-devel make libpq libpq-devel cmake xz libaio  ninja-build glib2 glib2-devel bzip2 pkgconfig
 
 wget https://rpmfind.net/linux/centos-stream/9-stream/AppStream/ppc64le/os/Packages/pixman-0.40.0-5.el9.ppc64le.rpm
 rpm -i pixman-0.40.0-5.el9.ppc64le.rpm
