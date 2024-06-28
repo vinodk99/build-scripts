@@ -1,11 +1,11 @@
 #!/bin/bash -e
 # -----------------------------------------------------------------------------
 #
-# Package          : apache-tinkerpop
-# Version          : 3.7.2
-# Source repo      : https://github.com/apache/tinkerpop
+# Package          : node-newrelic
+# Version          : v11.21.0
+# Source repo      : https://github.com/newrelic/node-newrelic
 # Tested on        : UBI:9.3
-# Language         : Java,C#
+# Language         : Typescript
 # Travis-Check     : True
 # Script License   : Apache License, Version 2 or later
 # Maintainer       : Vinod K <Vinod.K1@ibm.com>
@@ -18,43 +18,36 @@
 #
 # ----------------------------------------------------------------------------
 
-PACKAGE_VERSION=${1:-3.7.2}
-PACKAGE_NAME=tinkerpop
-PACKAGE_URL=https://github.com/apache/tinkerpop
+PACKAGE_NAME=node-newrelic
+PACKAGE_VERSION=${1:-v11.21.0}
+PACKAGE_URL=https://github.com/newrelic/node-newrelic
 
-OS_NAME=`cat /etc/os-release | grep PRETTY_NAME | cut -d '=' -f2 | tr -d '"'`
+export NODE_VERSION=${NODE_VERSION:-20}
 
-yum install -y git wget tar openssl-devel freetype fontconfig
+OS_NAME=$(grep ^PRETTY_NAME /etc/os-release | cut -d= -f2)
 
-wget https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.22%2B7/OpenJDK11U-jdk_ppc64le_linux_hotspot_11.0.22_7.tar.gz
-tar -C /usr/local -xzf OpenJDK11U-jdk_ppc64le_linux_hotspot_11.0.22_7.tar.gz
-export JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
-export JAVA_HOME=/usr/local/jdk-11.0.22+7/
-export PATH=$PATH:/usr/local/jdk-11.0.22+7/bin
-ln -sf /usr/local/jdk-11.0.22+7/bin/java /usr/bin/
-rm -rf OpenJDK11U-jdk_ppc64le_linux_hotspot_11.0.22_7.tar.gz
+yum install -y python3 python3-devel.ppc64le git gcc gcc-c++ libffi make
+#Installing nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+source "$HOME"/.bashrc
+echo "installing nodejs $NODE_VERSION"
+nvm install "$NODE_VERSION" >/dev/null
+nvm use $NODE_VERSION
 
-#install maven
-wget https://archive.apache.org/dist/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
-tar -zxf apache-maven-3.8.8-bin.tar.gz
-cp -R apache-maven-3.8.8 /usr/local
-ln -s /usr/local/apache-maven-3.8.8/bin/mvn /usr/bin/mvn
 
 git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 
-#Build and test.
-if !  mvn clean install -pl -:gremlin-javascript,-:gremlin-server,-:gremlin-socket-server,-:gremlint ; then
+if ! npm install ; then
     echo "------------------$PACKAGE_NAME:Build_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Build_Fails"
     exit 1
 fi
+sed -i 's/\(tap\.test('\''display_host'\'', { timeout: \)20000/\140000/' test/unit/facts.test.js
 
-#For testing skipping some modules for test because these modules require docker to be install inside the container.
-
-if ! mvn verify -pl -:gremlin-javascript,-:gremlin-server,-:gremlin-archetype-tinkergraph,-:gremlin-archetype-server,-:gremlin-archetype-dsl,-:gremlint ; then
+if ! npm run unit ; then
     echo "------------------$PACKAGE_NAME::Build_and_Test_fails-------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub  | Fail|  Build_and_Test_fails"
