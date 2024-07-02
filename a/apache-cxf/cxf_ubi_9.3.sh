@@ -43,15 +43,15 @@ git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 export MAVEN_OPTS="-Xmx1024m"
-
-if ! mvn -U clean install -Djava.awt.headless=true -fae -B -Peverything -DskipTests ; then
+ mvn -U clean install -fae -B
+if ! mvn -U clean install -Djava.awt.headless=true -fae -B -DskipTests ; then
     echo "------------------$PACKAGE_NAME:Install_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Build_Fails"
     exit 1
 fi
 
-if ! mvn -U clean install -Djava.awt.headless=true -fae -B -Peverything ; then
+if ! mvn -U clean install -Djava.awt.headless=true -fae -B ; then
     echo "------------------$PACKAGE_NAME::Install_and_Test_fails-------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub  | Fail|  Install_and_Test_fails"
