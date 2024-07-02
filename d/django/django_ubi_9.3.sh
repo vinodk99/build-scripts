@@ -26,7 +26,7 @@ export NODE_VERSION=${NODE_VERSION:-20}
 
 OS_NAME=$(grep ^PRETTY_NAME /etc/os-release | cut -d= -f2)
 
-yum install  gcc gcc-c++ make wget sudo git zlib-devel libjpeg-turbo libjpeg-turbo-devel libmemcached-awesome-devel python3.12 python3.12-devel python3.12-pip
+yum install -y gcc gcc-c++ make wget sudo git zlib-devel libjpeg-turbo libjpeg-turbo-devel libmemcached-awesome-devel python3.12 python3.12-devel python3.12-pip
 
 #install rustc
 wget https://static.rust-lang.org/dist/rust-1.75.0-powerpc64le-unknown-linux-gnu.tar.gz
