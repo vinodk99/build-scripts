@@ -22,8 +22,6 @@ PACKAGE_NAME=django
 PACKAGE_VERSION=${1:-5.0.6}
 PACKAGE_URL=https://github.com/django/django
 
-export NODE_VERSION=${NODE_VERSION:-20}
-
 OS_NAME=$(grep ^PRETTY_NAME /etc/os-release | cut -d= -f2)
 
 yum install -y gcc gcc-c++ make wget sudo git zlib-devel libjpeg-turbo libjpeg-turbo-devel libmemcached-awesome-devel python3.12 python3.12-devel python3.12-pip
@@ -42,14 +40,14 @@ cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 python3.12 -m pip install --upgrade pip setuptools wheel
 
-if ! python3.12 -m pip install -r tests/requirements/py3.txt -e . ; then
+if ! python3.12 -m pip install -r tests/requirements/py3.txt -e .; then
     echo "------------------$PACKAGE_NAME:Build_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Build_Fails"
     exit 1
 fi
 
-if ! python3.12 tests/runtests.py -v2 ; then
+if ! python3.12 tests/runtests.py -v2; then
     echo "------------------$PACKAGE_NAME::Build_and_Test_fails-------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub  | Fail|  Build_and_Test_fails"
