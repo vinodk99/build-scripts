@@ -37,7 +37,7 @@ rm -f OpenJDK17U-jdk_ppc64le_linux_hotspot_17.0.9_9.tar.gz
 wget https://archive.apache.org/dist/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
 tar -zxf apache-maven-3.8.7-bin.tar.gz
 cp -R apache-maven-3.8.7 /usr/local
-ln -s /usr/local/apache-maven-3.8.7/bin/mvn /usr/bin/mvn 
+ln -s /usr/local/apache-maven-3.8.7/bin/mvn /usr/bin/mvn
 
 git clone $PACKAGE_URL
 cd $PACKAGE_NAME
