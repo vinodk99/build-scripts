@@ -40,7 +40,7 @@ cd ../
 git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
-python3.11 -m pip install --upgrade pip setuptools wheel
+python3.12 -m pip install --upgrade pip setuptools wheel
 
 if ! python3.12 -m pip install -r tests/requirements/py3.txt -e . ; then
     echo "------------------$PACKAGE_NAME:Build_fails---------------------"
