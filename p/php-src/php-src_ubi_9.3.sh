@@ -2,7 +2,7 @@
 # -----------------------------------------------------------------------------
 #
 # Package          : php-src
-# Version          : php-8.3.9RC1
+# Version          : php-8.4.0alpha1
 # Source repo      : https://github.com/php/php-src
 # Tested on        : UBI:9.3
 # Language         : PHP
@@ -19,7 +19,7 @@
 # ----------------------------------------------------------------------------
 
 PACKAGE_NAME=php-src
-PACKAGE_VERSION=${1:-php-8.3.9RC1}
+PACKAGE_VERSION=${1:-php-8.4.0alpha1}
 PACKAGE_URL=https://github.com/php/php-src
 
 OS_NAME=$(grep ^PRETTY_NAME /etc/os-release | cut -d= -f2)
