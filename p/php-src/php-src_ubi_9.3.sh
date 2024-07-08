@@ -50,7 +50,7 @@ if ! make -j$(/usr/bin/nproc) && make install; then
 fi
 
 # Run the tests
-if ! sapi/cli/php run-tests.php -P --asan -q -d zend_extension=opcache.so -d opcache.enable_cli=1 -d opcache.jit=tracing -d opcache.protect_memory=1 -d opcache.jit_buffer_size=64M -j2 -g FAIL,BORK,LEAK,XLEAK --no-progress --offline --show-diff --show-slow 1000 --set-timeout 120
+if ! sapi/cli/php run-tests.php -P --asan -q -d zend_extension=opcache.so -d opcache.enable_cli=1 -d opcache.jit=tracing -d opcache.protect_memory=1 -d opcache.jit_buffer_size=64M -j2 -g FAIL,BORK,LEAK,XLEAK --no-progress --offline --show-diff --show-slow 1000 --set-timeout 120; then
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub  | Fail|  Build_and_Test_fails"
     exit 2
