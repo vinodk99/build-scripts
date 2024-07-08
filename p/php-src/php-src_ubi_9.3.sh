@@ -53,7 +53,7 @@ fi
 sed -i '/stream_isatty/d' tests/output/stream_isatty_in-out.phpt
 
 # Run the tests
-if ! sapi/cli/php run-tests.php -P -q -d opcache.jit=disable -d opcache.protect_memory=1 -d opcache.jit_buffer_size=64M -j4 -g FAIL,BORK,LEAK,XLEAK --no-progress --offline --show-diff --show-slow 1000 --set-timeout 120 ; then
+if ! sapi/cli/php run-tests.php --asan -P -q -d opcache.jit=disable -d opcache.protect_memory=1 -d opcache.jit_buffer_size=64M -j4 -g FAIL,BORK,LEAK,XLEAK --no-progress --offline --show-diff --show-slow 1000 --set-timeout 120 ; then
     echo "------------------$PACKAGE_NAME::Build_and_Test_fails-------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub  | Fail|  Build_and_Test_fails"
