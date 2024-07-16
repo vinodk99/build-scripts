@@ -1,7 +1,7 @@
 #!/bin/bash -e
 # -----------------------------------------------------------------------------
 #
-# Package       : nashorn
+# Package       : apache-cxf
 # Version       : main
 # Source repo   : https://github.com/openjdk/nashorn
 # Tested on     : UBI:9.3
@@ -18,7 +18,7 @@
 #
 # ----------------------------------------------------------------------------
 
-PACKAGE_NAME=cxf
+PACKAGE_NAME=nashorn
 PACKAGE_VERSION=${1:-main}
 PACKAGE_URL=https://github.com/openjdk/nashorn
 
