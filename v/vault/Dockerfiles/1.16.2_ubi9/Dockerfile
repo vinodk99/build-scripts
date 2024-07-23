@@ -2,11 +2,12 @@ FROM registry.access.redhat.com/ubi9 as builder
 
 ARG VAULT_VERSION=v1.16.2
 
-ARG GO_VERSION=1.22.1
+ARG GO_VERSION=`curl -s 'https://go.dev/VERSION?m=text' | grep ^go`
 
 RUN yum install -y gcc-c++ wget tar gzip git make && \
-    wget https://go.dev/dl/go${GO_VERSION}.linux-ppc64le.tar.gz && \
-    tar -C /usr/local -xf go${GO_VERSION}.linux-ppc64le.tar.gz && \
+    wget "https://go.dev/dl/$GO_VERSION.linux-ppc64le.tar.gz" && \
+    rm -rf /usr/local/go && \
+    tar -C /usr/local -xf $GO_VERSION.linux-ppc64le.tar.gz && \
     export GOROOT=/usr/local/go && \
     export GOPATH=$HOME && \
     export PATH=$GOPATH/bin:$GOROOT/bin:$PATH && \
