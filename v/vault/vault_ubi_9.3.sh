@@ -27,13 +27,13 @@ OS_NAME=$(grep ^PRETTY_NAME /etc/os-release | cut -d= -f2)
 yum install -y openssl sudo make git gcc wget
 
 #Install go
-GO_VERSION=`curl -s 'https://go.dev/VERSION?m=text' | grep ^go`
-wget "https://go.dev/dl/$GO_VERSION.linux-ppc64le.tar.gz"
-rm -rf /usr/local/go 
-tar -C /usr/local -xf $GO_VERSION.linux-ppc64le.tar.gz
-export GOROOT=/usr/local/go
-export GOPATH=$HOME
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export GO_VERSION=${GO_VERSION:-1.22.5}
+export GOROOT=${GOROOT:-"/usr/local/go"}
+export GOPATH=${GOPATH:-$HOME/go}
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:/usr/local/bin
+wget https://golang.org/dl/go${GO_VERSION}.linux-ppc64le.tar.gz
+tar -C /usr/local -xvzf go${GO_VERSION}.linux-ppc64le.tar.gz
+rm -rf go${GO_VERSION}.linux-ppc64le.tar.gz
 
 
 #install enumer 
