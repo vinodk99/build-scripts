@@ -45,7 +45,7 @@ git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 
-if ! mvn -Dmaven.test.skip=true clean install -e  ; then
+if ! mvn clean install -DskipTests=true -pl -:keycloak-admin-ui,-:keycloak-account-ui,-:keycloak-ui-shared ; then
     echo "------------------$PACKAGE_NAME:Build_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Build_Fails"
