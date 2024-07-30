@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "maintainer": "vinodk99",
     "package_name": "nashorn",
     "github_url": "https://github.com/openjdk/nashorn",
@@ -13,3 +14,19 @@
       "build_script": "nashorn_ubi_9.3.sh"
     } 
   }
+=======
+  "maintainer": "vinodk99",
+  "package_name": "nashorn",
+  "github_url": "https://github.com/openjdk/nashorn",
+  "version": "main",
+  "default_branch": "main",
+  "package_dir": "n/nashorn/",
+  "build_script": "nashorn_ubi_9.3.sh",
+  "docker_build": false,
+  "validate_build_script": true,
+  "use_non_root_user": false,
+  "main": {
+    "build_script": "nashorn_ubi_9.3.sh"
+  } 
+}
+>>>>>>> 38858f052c49a657ab098dd85ce3f46d10afc1e6

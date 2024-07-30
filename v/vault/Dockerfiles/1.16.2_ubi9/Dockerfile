@@ -1,6 +1,6 @@
 FROM registry.access.redhat.com/ubi9 as builder
 
-ARG VAULT_VERSION=v1.16.2
+ARG VAULT_VERSION=v1.17.2
 
 ARG GO_VERSION=1.22.5
 

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "maintainer": "vinodk99",
     "package_name": "php-src",
     "github_url": "https://github.com/php/php-src",
@@ -13,3 +14,19 @@
       "build_script": "php-src_ubi_9.3.sh"
     }
   }
+=======
+  "maintainer": "vinodk99",
+  "package_name": "php-src",
+  "github_url": "https://github.com/php/php-src",
+  "version": "php-8.4.0alpha1",
+  "default_branch": "master",
+  "package_dir": "p/php-src",
+  "build_script": "php-src_ubi_9.3.sh",
+  "validate_build_script": "true",
+  "use_non_root_user": "false",
+  "docker_build": "false",
+  "php-*.*.*": {
+    "build_script": "php-src_ubi_9.3.sh"
+  }
+}
+>>>>>>> 38858f052c49a657ab098dd85ce3f46d10afc1e6

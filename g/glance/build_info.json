@@ -11,11 +11,15 @@
   "use_non_root_user": "false",
   "docker_build": "true",
   "*-eom": {
+<<<<<<< HEAD
     "dir": "yogaeom_ubi8",
+=======
+    "dir": "zedeom_ubi9",
+>>>>>>> 38858f052c49a657ab098dd85ce3f46d10afc1e6
     "build_script": "glance_ubi_9.3.sh"
   },
-  "*.*.*": {
-    "dir": "yogaeom_ubi8",
-    "build_script": "glance_ubi_8.7.sh"
+  "*.*.*,*.*.*.*": {
+    "dir": "zedeom_ubi9",
+    "build_script": "glance_ubi_9.3.sh"
   }
 }
