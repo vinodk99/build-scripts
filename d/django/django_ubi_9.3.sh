@@ -1,15 +1,11 @@
 #!/bin/bash -e
 # -----------------------------------------------------------------------------
 #
-# Package          : vault
-<<<<<<< HEAD
-# Version          : v1.17.2
-=======
-# Version          : v1.16.2,v1.17.2
->>>>>>> 38858f052c49a657ab098dd85ce3f46d10afc1e6
-# Source repo      : https://github.com/hashicorp/vault
+# Package          : django
+# Version          : 5.0.6
+# Source repo      : https://github.com/django/django
 # Tested on        : UBI:9.3
-# Language         : Go
+# Language         : Python
 # Travis-Check     : True
 # Script License   : Apache License, Version 2 or later
 # Maintainer       : Vinod K <Vinod.K1@ibm.com>
@@ -22,44 +18,36 @@
 #
 # ----------------------------------------------------------------------------
 
-PACKAGE_NAME=vault
-PACKAGE_VERSION=${1:-v1.17.2}
-PACKAGE_URL=https://github.com/hashicorp/vault
+PACKAGE_NAME=django
+PACKAGE_VERSION=${1:-5.0.6}
+PACKAGE_URL=https://github.com/django/django
 
 OS_NAME=$(grep ^PRETTY_NAME /etc/os-release | cut -d= -f2)
 
-yum install -y openssl sudo make git gcc wget
+yum install -y gcc gcc-c++ make wget sudo git zlib-devel libjpeg-turbo libjpeg-turbo-devel libmemcached-awesome-devel python3.12 python3.12-devel python3.12-pip
 
-#Install go
-export GO_VERSION=${GO_VERSION:-1.22.5}
-export GOROOT=${GOROOT:-"/usr/local/go"}
-export GOPATH=${GOPATH:-$HOME/go}
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:/usr/local/bin
-wget https://golang.org/dl/go${GO_VERSION}.linux-ppc64le.tar.gz
-tar -C /usr/local -xvzf go${GO_VERSION}.linux-ppc64le.tar.gz
-rm -rf go${GO_VERSION}.linux-ppc64le.tar.gz
+#install rustc
+wget https://static.rust-lang.org/dist/rust-1.75.0-powerpc64le-unknown-linux-gnu.tar.gz
+tar -xzf rust-1.75.0-powerpc64le-unknown-linux-gnu.tar.gz
+cd rust-1.75.0-powerpc64le-unknown-linux-gnu
+sudo ./install.sh
+export PATH=$HOME/.cargo/bin:$PATH
+cd ../
 
-
-#install enumer 
-git clone https://github.com/dmarkham/enumer
-cd enumer
-git checkout v1.5.9
-go build ./...
-sudo mv enumer /usr/local/bin
-cd ..
 
 git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
+python3.12 -m pip install --upgrade pip setuptools wheel
 
-if ! make ; then
+if ! python3.12 -m pip install -r tests/requirements/py3.txt -e .; then
     echo "------------------$PACKAGE_NAME:Build_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Build_Fails"
     exit 1
 fi
 
-if ! make testrace TEST=./vault ; then
+if ! python3.12 tests/runtests.py -v2; then
     echo "------------------$PACKAGE_NAME::Build_and_Test_fails-------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub  | Fail|  Build_and_Test_fails"
