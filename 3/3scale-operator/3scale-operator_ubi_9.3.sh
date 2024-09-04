@@ -26,7 +26,7 @@ PACKAGE_URL=https://github.com/3scale/3scale-operator
 yum install git gcc make wget tar zip -y
 
 # Install Go and setup working directory
-GO_VERSION=1.22.4
+GO_VERSION=1.19.1
 wget https://golang.org/dl/go$GO_VERSION.linux-ppc64le.tar.gz && \
 tar -C /usr/local -xzf go$GO_VERSION.linux-ppc64le.tar.gz && \
 rm -rf go$GO_VERSION.linux-ppc64le.tar.gz
