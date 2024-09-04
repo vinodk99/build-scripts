@@ -18,7 +18,7 @@
 #             contact "Maintainer" of this script.
 #
 # ----------------------------------------------------------------------------
-set -e
+
 PACKAGE_NAME=eclipse-collections
 PACKAGE_URL=https://github.com/eclipse/eclipse-collections.git
 PACKAGE_VERSION=${1:-11.1.0}
