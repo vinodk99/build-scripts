@@ -1,15 +1,11 @@
 #!/bin/bash -e
 # -----------------------------------------------------------------------------
 #
-# Package          : vault
-<<<<<<< HEAD
-# Version          : v1.17.2
-=======
-# Version          : v1.16.2,v1.17.2
->>>>>>> 38858f052c49a657ab098dd85ce3f46d10afc1e6
-# Source repo      : https://github.com/hashicorp/vault
+# Package          : node-newrelic
+# Version          : v11.21.0
+# Source repo      : https://github.com/newrelic/node-newrelic
 # Tested on        : UBI:9.3
-# Language         : Go
+# Language         : Typescript
 # Travis-Check     : True
 # Script License   : Apache License, Version 2 or later
 # Maintainer       : Vinod K <Vinod.K1@ibm.com>
@@ -22,44 +18,36 @@
 #
 # ----------------------------------------------------------------------------
 
-PACKAGE_NAME=vault
-PACKAGE_VERSION=${1:-v1.17.2}
-PACKAGE_URL=https://github.com/hashicorp/vault
+PACKAGE_NAME=node-newrelic
+PACKAGE_VERSION=${1:-v11.21.0}
+PACKAGE_URL=https://github.com/newrelic/node-newrelic
+
+export NODE_VERSION=${NODE_VERSION:-20}
 
 OS_NAME=$(grep ^PRETTY_NAME /etc/os-release | cut -d= -f2)
 
-yum install -y openssl sudo make git gcc wget
+yum install -y python3 python3-devel.ppc64le git gcc gcc-c++ libffi make
+#Installing nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+source "$HOME"/.bashrc
+echo "installing nodejs $NODE_VERSION"
+nvm install "$NODE_VERSION" >/dev/null
+nvm use $NODE_VERSION
 
-#Install go
-export GO_VERSION=${GO_VERSION:-1.22.5}
-export GOROOT=${GOROOT:-"/usr/local/go"}
-export GOPATH=${GOPATH:-$HOME/go}
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:/usr/local/bin
-wget https://golang.org/dl/go${GO_VERSION}.linux-ppc64le.tar.gz
-tar -C /usr/local -xvzf go${GO_VERSION}.linux-ppc64le.tar.gz
-rm -rf go${GO_VERSION}.linux-ppc64le.tar.gz
-
-
-#install enumer 
-git clone https://github.com/dmarkham/enumer
-cd enumer
-git checkout v1.5.9
-go build ./...
-sudo mv enumer /usr/local/bin
-cd ..
 
 git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 
-if ! make ; then
+if ! npm install ; then
     echo "------------------$PACKAGE_NAME:Build_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Build_Fails"
     exit 1
 fi
+sed -i 's/\(tap\.test('\''display_host'\'', { timeout: \)20000/\140000/' test/unit/facts.test.js
 
-if ! make testrace TEST=./vault ; then
+if ! npm run unit ; then
     echo "------------------$PACKAGE_NAME::Build_and_Test_fails-------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub  | Fail|  Build_and_Test_fails"

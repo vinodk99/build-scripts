@@ -27,7 +27,11 @@ rm -f epel-release-latest-9.noarch.rpm
 
 yum install -y git gcc-c++ gcc wget make  python3 yum-utils apr-devel perl openssl-devel automake autoconf libtool cmake gflags  gflags-devel
 
+<<<<<<< HEAD
+git clone --recurse-submodules $PACKAGE_URL
+=======
 git clone --recurse-submodules $PACKAGE_URL 
+>>>>>>> 38858f052c49a657ab098dd85ce3f46d10afc1e6
 cd  $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 
@@ -53,5 +57,8 @@ else
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub  | Pass |  Both_Build_and_Test_Success"
     exit 0
 fi
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 38858f052c49a657ab098dd85ce3f46d10afc1e6

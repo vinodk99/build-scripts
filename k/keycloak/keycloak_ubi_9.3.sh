@@ -1,13 +1,9 @@
 #!/bin/bash -e
 # -----------------------------------------------------------------------------
 #
-# Package          : vault
-<<<<<<< HEAD
-# Version          : v1.17.2
-=======
-# Version          : v1.16.2,v1.17.2
->>>>>>> 38858f052c49a657ab098dd85ce3f46d10afc1e6
-# Source repo      : https://github.com/hashicorp/vault
+# Package          : keycloak
+# Version          : 25.0.4
+# Source repo      : https://github.com/keycloak/keycloak
 # Tested on        : UBI:9.3
 # Language         : Go
 # Travis-Check     : True
@@ -22,44 +18,49 @@
 #
 # ----------------------------------------------------------------------------
 
-PACKAGE_NAME=vault
-PACKAGE_VERSION=${1:-v1.17.2}
-PACKAGE_URL=https://github.com/hashicorp/vault
+PACKAGE_NAME=keycloak
+PACKAGE_VERSION=${1:-25.0.4}
+PACKAGE_URL=https://github.com/keycloak/keycloak
 
 OS_NAME=$(grep ^PRETTY_NAME /etc/os-release | cut -d= -f2)
 
-yum install -y openssl sudo make git gcc wget
+yum install -y git make wget gcc-c++
 
-#Install go
-export GO_VERSION=${GO_VERSION:-1.22.5}
-export GOROOT=${GOROOT:-"/usr/local/go"}
-export GOPATH=${GOPATH:-$HOME/go}
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:/usr/local/bin
-wget https://golang.org/dl/go${GO_VERSION}.linux-ppc64le.tar.gz
-tar -C /usr/local -xvzf go${GO_VERSION}.linux-ppc64le.tar.gz
-rm -rf go${GO_VERSION}.linux-ppc64le.tar.gz
+#install temurin java21
+wget https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.2%2B13/OpenJDK21U-jdk_ppc64le_linux_hotspot_21.0.2_13.tar.gz
+tar -C /usr/local -zxf OpenJDK21U-jdk_ppc64le_linux_hotspot_21.0.2_13.tar.gz
+export JAVA_HOME=/usr/local/jdk-21.0.2+13/
+export JAVA21_HOME=/usr/local/jdk-21.0.2+13/bin/
+export PATH=$PATH:/usr/local/jdk-21.0.2+13/bin/
+ln -sf /usr/local/jdk-21.0.2+13/bin/java /usr/bin/
+rm -rf OpenJDK21U-jdk_ppc64le_linux_hotspot_21.0.2_13.tar.gz
 
-
-#install enumer 
-git clone https://github.com/dmarkham/enumer
-cd enumer
-git checkout v1.5.9
-go build ./...
-sudo mv enumer /usr/local/bin
-cd ..
+#install maven
+wget https://archive.apache.org/dist/maven/maven-3/3.9.7/binaries/apache-maven-3.9.7-bin.tar.gz
+tar -zxf apache-maven-3.9.7-bin.tar.gz
+cp -R apache-maven-3.9.7 /usr/local
+ln -s /usr/local/apache-maven-3.9.7/bin/mvn /usr/bin/mvn
 
 git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 
-if ! make ; then
+if ! mvn clean install -DskipTests=true -pl -:keycloak-admin-ui,-:keycloak-account-ui,-:keycloak-ui-shared ; then
     echo "------------------$PACKAGE_NAME:Build_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub | Fail |  Build_Fails"
     exit 1
 fi
 
-if ! make testrace TEST=./vault ; then
+echo "Testing Unit Tests"
+SEP=""
+PROJECTS=""
+for i in `find -name '*Test.java' -type f | egrep -v './(testsuite|quarkus|docs|test-poc)/' | sed 's|/src/test/java/.*||' | sort | uniq | sed 's|./||'`; do
+    PROJECTS="$PROJECTS$SEP$i"
+    SEP=","
+done
+
+if ! ./mvnw test -pl "$PROJECTS" -am ; then
     echo "------------------$PACKAGE_NAME::Build_and_Test_fails-------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub  | Fail|  Build_and_Test_fails"
