@@ -29,10 +29,10 @@ export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 
 # install maven
-wget https://archive.apache.org/dist/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
-tar -zxf apache-maven-3.8.7-bin.tar.gz
-cp -R apache-maven-3.8.7 /usr/local
-ln -sf /usr/local/apache-maven-3.8.7/bin/mvn /usr/bin/mvn
+wget https://archive.apache.org/dist/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
+tar -zxf apache-maven-3.9.6-bin.tar.gz
+cp -R apache-maven-3.9.6 /usr/local
+ln -sf /usr/local/apache-maven-3.9.6/bin/mvn /usr/bin/mvn
 
 # Cloning the repository
 git clone $PACKAGE_URL
@@ -49,7 +49,7 @@ if ! mvn clean install ; then
 fi
 
 #Test
-if ! mvn test ; then
+if !   ./mvnw --color=always verify ; then
     echo "------------------$PACKAGE_NAME:Install_success_but_test_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_success_but_test_Fails"
