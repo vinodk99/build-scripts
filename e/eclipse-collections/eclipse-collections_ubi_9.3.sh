@@ -38,6 +38,7 @@ ln -sf /usr/local/apache-maven-3.8.7/bin/mvn /usr/bin/mvn
 git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
+mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
 
 #Build
 if ! mvn clean install ; then
