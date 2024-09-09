@@ -24,15 +24,11 @@ PACKAGE_URL=https://github.com/eclipse/eclipse-collections.git
 PACKAGE_VERSION=${1:-11.1.0}
 
 # install tools and dependent packages
-yum install -y java-11-openjdk java-11-openjdk-devel java-11-openjdk-headless git wget
+yum install -y java-11-openjdk java-11-openjdk-devel java-11-openjdk-headless git wget maven
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 
 # install maven
-wget https://archive.apache.org/dist/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
-tar -zxf apache-maven-3.9.6-bin.tar.gz
-cp -R apache-maven-3.9.6 /usr/local
-ln -sf /usr/local/apache-maven-3.9.6/bin/mvn /usr/bin/mvn
 
 # Cloning the repository
 git clone $PACKAGE_URL
