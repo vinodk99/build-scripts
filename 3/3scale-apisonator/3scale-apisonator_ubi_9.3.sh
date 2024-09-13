@@ -20,7 +20,7 @@
 
 PACKAGE_VERSION=${1:-3scale-2.14.1-GA}
 PACKAGE_NAME=apisonator
-PACKAGE_URL= https://github.com/3scale/apisonator
+PACKAGE_URL=https://github.com/3scale/apisonator
 
 yum install -y make wget gcc gcc-c++ autoconf automake glibc-headers \
     glibc-devel openssl-devel git procps ncurses-devel m4 \
