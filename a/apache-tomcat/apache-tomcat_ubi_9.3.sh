@@ -22,7 +22,7 @@ PACKAGE_VERSION=${1:-11.0.0-M26}
 PACKAGE_NAME=tomcat
 PACKAGE_URL=https://github.com/apache/tomcat
 
-yum install git wget gcc-c++ gcc java-17-openjdk java-17-openjdk-devel java-17-openjdk-headless
+yum install -y unzip git wget gcc-c++ gcc java-17-openjdk java-17-openjdk-devel java-17-openjdk-headless
 
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export PATH=$PATH:$JAVA_HOME
