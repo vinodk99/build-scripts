@@ -14,4 +14,8 @@ RUN git clone --recurse-submodules https://github.com/facebook/rocksdb && \
     cmake .. && \
     cmake --build .
 
+<<<<<<< HEAD
 CMD ["/bin/bash"]
+=======
+CMD ["/bin/bash"]
+>>>>>>> 38858f052c49a657ab098dd85ce3f46d10afc1e6

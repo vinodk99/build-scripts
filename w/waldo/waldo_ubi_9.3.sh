@@ -85,4 +85,8 @@ else
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub  | Pass |  Both_Install_and_Test_Success"
     exit 0
+<<<<<<< HEAD
 fi
+=======
+fi
+>>>>>>> 64b00e1eca7e22b9a925731b22ea2fd0b22b219f

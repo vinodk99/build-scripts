@@ -2,10 +2,17 @@
 # -----------------------------------------------------------------------------
 #
 # Package          : keycloak
+<<<<<<< HEAD
 # Version          : 25.0.6
 # Source repo      : https://github.com/keycloak/keycloak
 # Tested on        : UBI:9.3
 # Language         : Java
+=======
+# Version          : 25.0.4
+# Source repo      : https://github.com/keycloak/keycloak
+# Tested on        : UBI:9.3
+# Language         : Go
+>>>>>>> 64b00e1eca7e22b9a925731b22ea2fd0b22b219f
 # Travis-Check     : True
 # Script License   : Apache License, Version 2 or later
 # Maintainer       : Vinod K <Vinod.K1@ibm.com>
@@ -17,8 +24,14 @@
 #                    contact "Maintainer" of this script.
 #
 # ----------------------------------------------------------------------------
+<<<<<<< HEAD
 PACKAGE_NAME=keycloak
 PACKAGE_VERSION=${1:-25.0.6}
+=======
+
+PACKAGE_NAME=keycloak
+PACKAGE_VERSION=${1:-25.0.4}
+>>>>>>> 64b00e1eca7e22b9a925731b22ea2fd0b22b219f
 PACKAGE_URL=https://github.com/keycloak/keycloak
 
 OS_NAME=$(grep ^PRETTY_NAME /etc/os-release | cut -d= -f2)
@@ -44,8 +57,11 @@ git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 
+<<<<<<< HEAD
 export MAVEN_OPTS="-Xmx2048m -Xms1024m  -Djava.awt.headless=true"
 
+=======
+>>>>>>> 64b00e1eca7e22b9a925731b22ea2fd0b22b219f
 if ! mvn clean install -DskipTests=true -pl -:keycloak-admin-ui,-:keycloak-account-ui,-:keycloak-ui-shared ; then
     echo "------------------$PACKAGE_NAME:Build_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
@@ -61,7 +77,11 @@ for i in `find -name '*Test.java' -type f | egrep -v './(testsuite|quarkus|docs|
     SEP=","
 done
 
+<<<<<<< HEAD
 if ! ./mvnw test -pl "$PROJECTS" -am -pl -:keycloak-services; then
+=======
+if ! ./mvnw test -pl "$PROJECTS" -am ; then
+>>>>>>> 64b00e1eca7e22b9a925731b22ea2fd0b22b219f
     echo "------------------$PACKAGE_NAME::Build_and_Test_fails-------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | $OS_NAME | GitHub  | Fail|  Build_and_Test_fails"
