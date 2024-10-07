@@ -2,7 +2,11 @@
 # -----------------------------------------------------------------------------
 #
 # Package          : vault
+<<<<<<< HEAD
+# Version          : v1.17.2
+=======
 # Version          : v1.16.2,v1.17.2
+>>>>>>> 38858f052c49a657ab098dd85ce3f46d10afc1e6
 # Source repo      : https://github.com/hashicorp/vault
 # Tested on        : UBI:9.3
 # Language         : Go
@@ -34,6 +38,7 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin:/usr/local/bin
 wget https://golang.org/dl/go${GO_VERSION}.linux-ppc64le.tar.gz
 tar -C /usr/local -xvzf go${GO_VERSION}.linux-ppc64le.tar.gz
 rm -rf go${GO_VERSION}.linux-ppc64le.tar.gz
+
 
 #install enumer 
 git clone https://github.com/dmarkham/enumer

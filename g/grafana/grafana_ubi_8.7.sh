@@ -21,7 +21,7 @@
 PACKAGE_NAME="grafana"
 PACKAGE_URL="https://github.com/grafana/grafana.git"
 PACKAGE_VERSION=v10.1.1
-NODE_VERSION=${NODE_VERSION:-18}
+NODE_VERSION=${NODE_VERSION:-20}
 GO_VERSION=1.20.6
 
 yum install wget git curl make gcc-c++ patch python38 -y 
