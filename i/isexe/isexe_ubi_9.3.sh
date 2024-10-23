@@ -31,8 +31,6 @@ echo "installing nodejs $NODE_VERSION"
 nvm install "$NODE_VERSION" >/dev/null
 nvm use $NODE_VERSION
 
-
-
 git clone $PACKAGE_URL $PACKAGE_NAME
 cd  $PACKAGE_NAME
 git checkout $PACKAGE_VERSION

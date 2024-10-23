@@ -1,9 +1,9 @@
 #!/bin/bash -e
 # -----------------------------------------------------------------------------
 #
-# Package       : waldo
-# Version       : 0.5.2
-# Source repo   : https://github.com/cran/waldo
+# Package       : viridisLite
+# Version       : 0.4.2
+# Source repo   : https://github.com/cran/viridisLite
 # Tested on     : UBI:9.3
 # Language      : R
 # Travis-Check  : True
@@ -18,12 +18,12 @@
 #
 # ----------------------------------------------------------------------------
 
+PACKAGE_NAME=viridisLite
+PACKAGE_VERSION=${1:-0.4.2}
+PACKAGE_URL=https://github.com/cran/viridisLite
 
-PACKAGE_NAME=waldo
-PACKAGE_VERSION=${1:-0.5.2}
-PACKAGE_URL=https://github.com/cran/waldo
 
-dnf install -y gcc gcc-c++ gcc-gfortran git wget xz cmake make yum-utils sudo llvm libcurl-devel 
+dnf install -y gcc gcc-c++ gcc-gfortran git wget xz cmake make libcurl-devel yum-utils wget sudo llvm -y
 dnf config-manager --add-repo https://mirror.stream.centos.org/9-stream/AppStream/ppc64le/os/
 dnf config-manager --add-repo https://mirror.stream.centos.org/9-stream/BaseOS/ppc64le/os/
 dnf config-manager --add-repo https://mirror.stream.centos.org/9-stream/CRB/ppc64le/os/
@@ -41,6 +41,7 @@ dnf install -y libtirpc.ppc64le
 dnf install -y R-core R-core-devel
 dnf builddep R -y
 R --version
+
 
 yum install -y openssl-devel
 
@@ -85,8 +86,4 @@ else
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub  | Pass |  Both_Install_and_Test_Success"
     exit 0
-<<<<<<< HEAD
 fi
-=======
-fi
->>>>>>> 64b00e1eca7e22b9a925731b22ea2fd0b22b219f

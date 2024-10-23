@@ -18,29 +18,26 @@
 #             contact "Maintainer" of this script.
 #
 # ----------------------------------------------------------------------------
-set -e
+
 PACKAGE_NAME=eclipse-collections
 PACKAGE_URL=https://github.com/eclipse/eclipse-collections.git
 PACKAGE_VERSION=${1:-11.1.0}
 
 # install tools and dependent packages
-yum install -y java-11-openjdk java-11-openjdk-devel java-11-openjdk-headless git wget
+yum install -y java-11-openjdk java-11-openjdk-devel java-11-openjdk-headless git wget maven
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 
 # install maven
-wget https://archive.apache.org/dist/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
-tar -zxf apache-maven-3.8.7-bin.tar.gz
-cp -R apache-maven-3.8.7 /usr/local
-ln -sf /usr/local/apache-maven-3.8.7/bin/mvn /usr/bin/mvn
 
 # Cloning the repository
 git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
+mvn --non-recursive wrapper:wrapper -Dmaven=3.9.6
 
 #Build
-if ! mvn -B clean install -fae ; then
+if ! mvn clean install ; then
     echo "------------------$PACKAGE_NAME:Install_fails-------------------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_Fails"
@@ -48,7 +45,7 @@ if ! mvn -B clean install -fae ; then
 fi
 
 #Test
-if ! mvn test -DforkCount=2 ; then
+if !   ./mvnw --color=always verify ; then
     echo "------------------$PACKAGE_NAME:Install_success_but_test_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_success_but_test_Fails"

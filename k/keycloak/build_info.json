@@ -2,7 +2,11 @@
   "maintainer": "vinodk99",
   "package_name": "keycloak",
   "github_url": "https://github.com/keycloak/keycloak.git",
+<<<<<<< HEAD
   "version": "25.0.6",
+=======
+  "version": "25.0.4",
+>>>>>>> 64b00e1eca7e22b9a925731b22ea2fd0b22b219f
   "package_dir": "k/keycloak",
   "default_branch": "main",
   "build_script": "keycloak_ubi_9.3.sh",
