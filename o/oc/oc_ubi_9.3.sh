@@ -24,7 +24,7 @@ PACKAGE_URL=https://github.com/openshift/oc.git
 
 yum install -y git gcc make wget
 
-GO_VERSION=1.23
+GO_VERSION=1.23.2
 wget https://golang.org/dl/go$GO_VERSION.linux-ppc64le.tar.gz && \
 tar -C /usr/local -xzf go$GO_VERSION.linux-ppc64le.tar.gz && \
 rm -rf go$GO_VERSION.linux-ppc64le.tar.gz
