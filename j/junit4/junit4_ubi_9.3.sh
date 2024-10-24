@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/bash -e
 # ----------------------------------------------------------------------------
 #
 # Package       : junit4
 # Version       : r4.13.2
-# Source repo   : https://github.com/junit-team/junit4.git
+# Source repo   : https://github.com/junit-team/junit4
 # Tested on     : UBI 9.3
 # Language      : Java
 # Travis-Check  : True
@@ -18,12 +18,9 @@
 #
 # ----------------------------------------------------------------------------
 
-
-set -e
-
 # variables
 PACKAGE_NAME=junit4
-PACKAGE_URL=https://github.com/junit-team/junit4.git
+PACKAGE_URL=https://github.com/junit-team/junit4
 PACKAGE_VERSION=${1:-r4.13.2}
 
 # install tools and dependent packages
@@ -68,13 +65,10 @@ EOF
 #Build
 
 # # install maven
-wget https://archive.apache.org/dist/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
-tar -xvzf apache-maven-3.8.6-bin.tar.gz
-cp -R apache-maven-3.8.6 /usr/local
+wget https://archive.apache.org/dist/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz   
+tar -xvzf apache-maven-3.8.6-bin.tar.gz     
+cp -R apache-maven-3.8.6 /usr/local    
 ln -s /usr/local/apache-maven-3.8.6/bin/mvn /usr/bin/mvn
-export M2_HOME=/usr/local/maven
-# update the path env. variable 
-export PATH=$PATH:$M2_HOME/bin
 chown testuser -R /home/testuser
 
 if ! su -p testuser -c 'mvn verify javadoc:javadoc site:site --batch-mode --errors --settings settings.xml'; then
@@ -82,6 +76,10 @@ if ! su -p testuser -c 'mvn verify javadoc:javadoc site:site --batch-mode --erro
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_Fails"
     exit 1
+else
+    echo "------------------$PACKAGE_NAME:Build_and_Test_success-------------------------------------"
+    echo "$PACKAGE_URL $PACKAGE_NAME"
+    echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Build_and_Test_success"
+    exit 0
 fi 
 
-exit 0
