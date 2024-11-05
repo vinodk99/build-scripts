@@ -25,7 +25,7 @@ yum install git wget -y
 yum install java-1.8.0-openjdk-devel -y
 yum -y update && yum install -y yum-utils  npm python38 python38-devel ncurses git gcc gcc-c++ libffi libffi-devel jq make cmake
 
-export NODE_VERSION=${NODE_VERSION:-18}
+export NODE_VERSION=${NODE_VERSION:-20}
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 source "$HOME"/.bashrc
 echo "installing nodejs $NODE_VERSION"
