@@ -23,11 +23,14 @@ PACKAGE_VERSION=${1:-release-2.3.0}
 PACKAGE_URL=https://github.com/apache/atlas
 yum install git wget -y
 yum install java-1.8.0-openjdk-devel -y
-yum -y update && yum install -y yum-utils nodejs nodejs-devel nodejs-packaging npm python38 python38-devel ncurses git gcc gcc-c++ libffi libffi-devel jq make cmake
+yum -y update && yum install -y yum-utils  npm python38 python38-devel ncurses git gcc gcc-c++ libffi libffi-devel jq make cmake
 
-dnf module reset -y nodejs
-dnf module enable -y nodejs:18
-dnf module install -y nodejs:18
+export NODE_VERSION=${NODE_VERSION:-18}
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+source "$HOME"/.bashrc
+echo "installing nodejs $NODE_VERSION"
+nvm install "$NODE_VERSION" >/dev/null
+nvm use $NODE_VERSION
 npm install -g npm@9.5.1
 npm install -g node-sass
 npm install -g node-gyp
@@ -35,13 +38,10 @@ npm install yarn --global
 
 ln -sf /usr/bin/python3 /usr/bin/python
 cd /opt/
-wget https://www-eu.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
-tar xzf apache-maven-3.6.3-bin.tar.gz
-ln -sf apache-maven-3.6.3 maven
-rm -rf apache-maven-3.6.3-bin.tar.gz
-export MVN_HOME=/opt/maven
-export PATH=${MVN_HOME}/bin:${PATH}
-mvn -version
+wget https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+tar -zxf apache-maven-3.6.3-bin.tar.gz
+cp -R apache-maven-3.6.3 /usr/local
+ln -s /usr/local/apache-maven-3.6.6/bin/mvn /usr/bin/mvn
 export MAVEN_OPTS="-Xms2g -Xmx2g"
 if [ -d "/opt/atlas" ]
 then
