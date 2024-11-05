@@ -25,9 +25,12 @@ yum install git wget -y
 yum install java-1.8.0-openjdk-devel -y
 yum -y update && yum install -y yum-utils  npm python38 python38-devel ncurses git gcc gcc-c++ libffi libffi-devel jq make cmake
 
-dnf module reset -y nodejs
-dnf module enable -y nodejs:18
-dnf module install -y nodejs:18
+export NODE_VERSION=${NODE_VERSION:-18}
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+source "$HOME"/.bashrc
+echo "installing nodejs $NODE_VERSION"
+nvm install "$NODE_VERSION" >/dev/null
+nvm use $NODE_VERSION
 npm install -g npm@9.5.1
 npm install -g node-sass
 npm install -g node-gyp
