@@ -42,13 +42,15 @@ if ! npm install; then
     exit 1
 fi
 
-cd /codsen/node_modules/codsen-utils/
+cd node_modules/codsen-utils/
 npm install
 npm run build
+cd ../..
 
-cd /codsen/node_modules/lerna-clean-changelogs
+cd node_modules/lerna-clean-changelogs
 npm install
 npm run build
+cd ../..
 
 if ! npm test; then
     echo "------------------$PACKAGE_NAME:install_success_but_test_fails---------------------"
