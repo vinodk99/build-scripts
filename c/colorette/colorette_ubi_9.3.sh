@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/bin/bash -e
 # -----------------------------------------------------------------------------
 #
@@ -54,3 +55,5 @@ else
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub  | Pass |  Both_Install_and_Test_Success"
     exit 0
 fi
+=======
+>>>>>>> bda55bd15 (Currency: Added build-script and build_info.json for colorette (#4725))

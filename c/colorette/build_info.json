@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "maintainer": "vinodk99",
     "package_name": "colorette",
@@ -13,3 +14,5 @@
       "build_script": "colorette_ubi_9.3.sh"
     }
  }
+=======
+>>>>>>> bda55bd15 (Currency: Added build-script and build_info.json for colorette (#4725))
