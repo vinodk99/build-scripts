@@ -25,4 +25,12 @@ EXPOSE 8080 8443 10000 8000
 
 WORKDIR /nifi
 
+<<<<<<< HEAD
 ENTRYPOINT ["/nifi/nifi-docker/dockerhub/sh/start.sh"]
+=======
+<<<<<<< HEAD
+ENTRYPOINT ["/nifi/nifi-docker/dockerhub/sh/start.sh"]
+=======
+ENTRYPOINT ["/nifi/nifi-docker/dockerhub/sh/start.sh"]
+>>>>>>> 9a50d7f1d (Currency:Updated ubi9 dockerfile for apache-nifi (#4761))
+>>>>>>> d9c971c37 (Currency:Updated ubi9 dockerfile for apache-nifi (#4761))
