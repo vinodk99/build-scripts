@@ -20,7 +20,7 @@
 
 # variables
 PACKAGE_NAME=junit4
-PACKAGE_URL=https://github.com/junit-team/junit4
+PACKAGE_URL=https://github.com/junit-team/junit4.git
 PACKAGE_VERSION=${1:-r4.13.2}
 
 # install tools and dependent packages
