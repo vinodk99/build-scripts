@@ -38,7 +38,7 @@ jobs:
             - variable.sh
 
     - stage: Build
-      if: env(VALIDATE_BUILD_SCRIPT) = true
+      if: env(VALIDATE_BUILD_SCRIPT) = false
       name: Build script run
       script:
         - source variable.sh
