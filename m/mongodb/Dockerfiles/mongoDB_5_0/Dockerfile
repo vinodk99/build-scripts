@@ -94,7 +94,7 @@ RUN apt-get update \
         && git checkout r${MONGO_VERSION} \
         && sed -i '/PyYAML/d' etc/pip/components/core.req && sed -i '4 a PyYAML >= 3.0.0' etc/pip/components/core.req \
         && python3 -m pip install -r etc/pip/compile-requirements.txt \
-        && python3 buildscripts/scons.py install-mongod install-mongo --separate-debug=on --disable-warnings-as-errors DESTDIR=/usr/ --ssl=on --no-cache --release \
+        && python3 buildscripts/scons.py -j3 install-mongod install-mongo --separate-debug=on --disable-warnings-as-errors DESTDIR=/usr/ --ssl=on --no-cache --release \
         && apt-get purge -y --auto-remove \
                 ca-certificates \
                 wget \
