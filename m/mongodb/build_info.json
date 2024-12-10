@@ -8,9 +8,9 @@
   "use_non_root_user": "false",
   "docker_build": "true",
   "package_dir": "m/mongodb/",
-  "docker_cmd": "docker build -t ${package_name}-ppc64le:$PACKAGE_VERSION ${dir}",
+  "docker_cmd": "docker build -t ${package_name}:$PACKAGE_VERSION ${dir}",
   "validate_build_script": false,
-  "r6.*.*": {
+  "r6.0.19": {
     "dir": "mongodb_6.0.19",
     "args": {
       "MONGO_VERSION": "$(echo $PACKAGE_VERSION | sed 's/r//')",
