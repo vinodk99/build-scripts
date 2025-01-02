@@ -23,10 +23,10 @@ PACKAGE_NAME=onnx
 PACKAGE_VERSION=${1:-v1.13.1}
 PACKAGE_URL=https://github.com/onnx/onnx
 
-# Install dependencies
+echo "Installing dependencies..."
 yum install -y git make libtool gcc-c++ libevent-devel zlib-devel openssl-devel python python-devel cmake gcc-gfortran openblas openblas-devel
 
-#Install protobuf-c
+echo "Downloading and installing protobuf-c"
 git clone https://github.com/protocolbuffers/protobuf.git
 cd protobuf
 git checkout v3.20.2
@@ -37,15 +37,16 @@ make -j$(nproc)
 make install
 cd ../..
 
-# Clone the repository
+echo "Cloning and installing..."
 git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 git submodule update --init --recursive
 
+echo "Installing python dependencies"
 pip install pytest nbval numpy==1.23.2 cython pythran scipy
 
-#install
+echo "Installing..."
 if ! pip install -e . ; then
     echo "------------------$PACKAGE_NAME:Install_fails-------------------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
@@ -53,7 +54,7 @@ if ! pip install -e . ; then
     exit 1
 fi
 
-#run tests  
+echo "Testing..."
 if ! pytest --ignore=onnx/test/reference_evaluator_backend_test.py ; then
     echo "------------------$PACKAGE_NAME:Install_success_but_test_fails---------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
