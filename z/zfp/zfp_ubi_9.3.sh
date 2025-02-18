@@ -27,7 +27,7 @@ PACKAGE_DIR="./zfp"
 
 echo "Installing dependencies..."
 yum install -y wget gcc gcc-c++ gcc-gfortran git make \
-               python python-devel python3-pip \
+               python python-devel python-pip \
                openssl-devel cmake
 
 echo "Cloning and installing..."
@@ -36,7 +36,6 @@ cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 
 echo "Installing Python dependencies..."
-pip install --upgrade pip
 pip install cython==0.29.36 numpy==1.23.5 wheel
 
 echo "Creating build directory..."
@@ -45,9 +44,9 @@ cd build
 
 echo "Running CMake..."
 cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_ZFPY=ON \
-    -DPYTHON_EXECUTABLE=$(which python3) \
-    -DPYTHON_INCLUDE_DIR=$(python3 -c "import sysconfig; print(sysconfig.get_path('include'))") \
-    -DPYTHON_LIBRARY=$(python3 -c "import sysconfig; print(sysconfig.get_config_var('LIBDIR'))")
+    -DPYTHON_EXECUTABLE=$(which python) \
+    -DPYTHON_INCLUDE_DIR=$(python -c "import sysconfig; print(sysconfig.get_path('include'))") \
+    -DPYTHON_LIBRARY=$(python -c "import sysconfig; print(sysconfig.get_config_var('LIBDIR'))")
 
 echo "Building zfp..."
 make -j$(nproc)
