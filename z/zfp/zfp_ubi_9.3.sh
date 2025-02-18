@@ -26,7 +26,6 @@ PACKAGE_URL=https://github.com/LLNL/zfp
 PACKAGE_DIR="./zfp"
 
 echo "Installing dependencies..."
-yum install -y epel-release
 yum install -y wget gcc gcc-c++ gcc-gfortran git make \
                python python-devel python3-pip \
                openssl-devel cmake
