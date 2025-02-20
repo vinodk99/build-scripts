@@ -6,8 +6,8 @@ language: shell
 
 branches:
   only:
-    - master
-    - python-ecosystem
+    - forkpythontravis
+
 
 env:
   global:
@@ -91,7 +91,7 @@ jobs:
         - source variable.sh
         - chmod +x ./script/build_wheels.sh; bash ./script/build_wheels.sh;
         - WHEEL_FILE=*.whl
-        - chmod +x ./script/upload-scripts/upload_wheel.sh; bash ./script/upload-scripts/upload_wheel.sh $WHEEL_FILE
+       # - chmod +x ./script/upload-scripts/upload_wheel.sh; bash ./script/upload-scripts/upload_wheel.sh $WHEEL_FILE
       workspaces:
         create:
           name: wheels_cache_310
@@ -106,7 +106,7 @@ jobs:
         - source variable.sh
         - chmod +x ./script/build_wheels.sh; bash ./script/build_wheels.sh;
         - WHEEL_FILE=*.whl
-        - chmod +x ./script/upload-scripts/upload_wheel.sh; bash ./script/upload-scripts/upload_wheel.sh $WHEEL_FILE
+      #  - chmod +x ./script/upload-scripts/upload_wheel.sh; bash ./script/upload-scripts/upload_wheel.sh $WHEEL_FILE
       workspaces:
         create:
           name: wheels_cache_311
@@ -120,7 +120,7 @@ jobs:
         - source variable.sh
         - chmod +x ./script/build_wheels.sh; bash ./script/build_wheels.sh;
         - WHEEL_FILE=*.whl
-        - chmod +x ./script/upload-scripts/upload_wheel.sh; bash ./script/upload-scripts/upload_wheel.sh $WHEEL_FILE
+       # - chmod +x ./script/upload-scripts/upload_wheel.sh; bash ./script/upload-scripts/upload_wheel.sh $WHEEL_FILE
       workspaces:
         create:
           name: wheels_cache_312
@@ -135,7 +135,7 @@ jobs:
         - source variable.sh
         - chmod +x ./script/build_wheels.sh; bash ./script/build_wheels.sh;
         - WHEEL_FILE=*.whl
-        - chmod +x ./script/upload-scripts/upload_wheel.sh; bash ./script/upload-scripts/upload_wheel.sh $WHEEL_FILE
+       # - chmod +x ./script/upload-scripts/upload_wheel.sh; bash ./script/upload-scripts/upload_wheel.sh $WHEEL_FILE
       workspaces:
         create:
           name: wheels_cache_313
@@ -217,7 +217,7 @@ jobs:
         - source variable.sh;
         - chmod +x ./script/build_docker.sh; bash ./script/build_docker.sh;echo "printing docker images"; docker images;
         # the below command is used to upload docker image to ibm icr registry.
-        - chmod +x ./script/upload-scripts/upload_docker_image.sh; bash ./script/upload-scripts/upload_docker_image.sh;
+       # - chmod +x ./script/upload-scripts/upload_docker_image.sh; bash ./script/upload-scripts/upload_docker_image.sh;
       workspaces:
         create:
           name: docker_image_tar
