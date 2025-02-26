@@ -58,7 +58,7 @@ git checkout $PACKAGE_VERSION
 pip install wheel pytest tox nox mock
 pip install -r test-requirements.txt
 
-python setup.py build_ext --inplace
+python3 setup.py build_ext --inplace
 
 #Install
 if ! (python3 -m pip install .) ; then
