@@ -41,7 +41,7 @@ git checkout $PACKAGE_VERSION
 if ! command -v rustc &> /dev/null; then
     echo "Rust not found. Installing Rust..."
     curl https://sh.rustup.rs -sSf | sh -s -- -y
-    source "$HOME/.cargo/env"  
+    source "$HOME/.cargo/env"
 else
     echo "Rust is already installed."
 fi
@@ -57,8 +57,8 @@ if ! pip install . ; then
     exit 1
 fi
 
-# Building wheel with script itself as it needs to locate the libzmq target file 
-if ! python3 -m setup.py bdist_wheel --plat-name manylinux2014_ppc64le --outdir="$CURRENT_DIR"; then
+# Building wheel with script itself as it needs to locate the libzmq target file
+if ! python3  setup.py bdist_wheel --plat-name manylinux2014_ppc64le --dist-dir="$CURRENT_DIR"; then
     echo "------------------$PACKAGE_NAME: Wheel Build Failed ---------------------"
     exit 2
 else
@@ -66,4 +66,4 @@ else
     exit 0
 fi
 
-# No tests to run for this package 
+# No tests to run for this package
