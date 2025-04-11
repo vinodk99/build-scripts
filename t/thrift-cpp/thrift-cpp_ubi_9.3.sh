@@ -147,7 +147,7 @@ mkdir -p local/thriftcpp
 cp -r $PREFIX/* local/thriftcpp/
 
 #pyproject.toml
-wget https://raw.githubusercontent.com/ppc64le/build-scripts/refs/heads/python-ecosystem/t/thrift-cpp/pyproject.toml
+wget https://raw.githubusercontent.com/vinodk99/build-scripts/refs/heads/replica-python-eco-system/t/thrift-cpp/pyproject.toml
 sed -i s/{PACKAGE_VERSION}/$PACKAGE_VERSION/g pyproject.toml
 
 
