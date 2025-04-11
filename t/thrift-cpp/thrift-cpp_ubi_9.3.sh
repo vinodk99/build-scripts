@@ -150,7 +150,7 @@ cp -r $PREFIX/* local/thriftcpp/
 wget https://raw.githubusercontent.com/vinodk99/build-scripts/refs/heads/replica-python-eco-system/t/thrift-cpp/pyproject.toml
 sed -i s/{PACKAGE_VERSION}/$PACKAGE_VERSION/g pyproject.toml
 
-pip install  setuptools wheel ninja packaging auditwheel
+pip install setuptools wheel ninja packaging auditwheel
 #install
 if ! (pip install .) ; then
     echo "------------------$PACKAGE_NAME:Install_fails-------------------------------------"
