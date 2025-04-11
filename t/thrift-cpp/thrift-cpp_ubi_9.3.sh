@@ -35,7 +35,7 @@ PACKAGE_URL=https://github.com/apache/thrift
 yum install -y python python-pip python-devel git make  python-devel  openssl-devel cmake zlib-devel libjpeg-devel gcc-toolset-13 cmake libevent libtool flex bison
 
 export PATH=/opt/rh/gcc-toolset-13/root/usr/bin:$PATH
-pip install ninja setuptools
+pip install ninja setuptools 
 
 #installing boost
 
@@ -150,7 +150,7 @@ cp -r $PREFIX/* local/thriftcpp/
 wget https://raw.githubusercontent.com/vinodk99/build-scripts/refs/heads/replica-python-eco-system/t/thrift-cpp/pyproject.toml
 sed -i s/{PACKAGE_VERSION}/$PACKAGE_VERSION/g pyproject.toml
 
-
+pip install  setuptools wheel ninja packaging auditwheel
 #install
 if ! (pip install .) ; then
     echo "------------------$PACKAGE_NAME:Install_fails-------------------------------------"
