@@ -1,7 +1,10 @@
 # Minimum requirements for the build system to execute.
 # Do not include sys,subprocess and os as they are default packages
+[build-system]
 requires = [
     "wheel",
+    "auditwheel>=5.0.0",
+
 ]
 
 #Set build backend to setuptools

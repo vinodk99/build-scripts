@@ -3,6 +3,8 @@
 requires = [
     "setuptools",
     "wheel",
+    "auditwheel>=5.0.0",
+
 ]
 build-backend = "setuptools.build_meta"
 
