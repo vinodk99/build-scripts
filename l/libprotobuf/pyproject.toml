@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "libprotobuf"
-version = "4.25.3"
+version = "{PACKAGE_VERSION}"
 description = "Provides protoc compiler and C++ files for protobuf"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
