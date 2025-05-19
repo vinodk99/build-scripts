@@ -32,7 +32,7 @@ export LD_LIBRARY_PATH=/opt/rh/gcc-toolset-13/root/usr/lib64:$LD_LIBRARY_PATH
 
 echo "----Installing rust------"
 curl https://sh.rustup.rs -sSf | sh -s -- -y
-source "$HOME/.cargo/env
+source "$HOME/.cargo/env"
 
 # Clone the repository
 git clone $PACKAGE_URL
