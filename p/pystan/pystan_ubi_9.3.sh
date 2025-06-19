@@ -37,7 +37,7 @@ cd cmdstan
 git checkout v2.34.1
 git submodule update --init --recursive
 make build -j$(nproc)
-export PATH=/cmdstan/bin:$PATH
+export PATH=$CURRENT_DIR/cmdstan/bin:$PATH
 which stanc
 stanc --version
 
