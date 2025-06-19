@@ -66,7 +66,7 @@ git clone $PACKAGE_URL
 cd $PACKAGE_NAME
 git checkout $PACKAGE_VERSION
 
-python3.12 -m pip install -r /httpstan/requirements.txt
+python3.12 -m pip install -r $CURRENT_DIR/httpstan/requirements.txt
 poetry build -v
 
 if ! pip3.12 install -e . ; then
@@ -89,5 +89,4 @@ else
     echo "------------------$PACKAGE_NAME:Install_&_test_both_success-------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub  | Pass |  Both_Install_and_Test_Success"
-    exit 0
-fi
+   
