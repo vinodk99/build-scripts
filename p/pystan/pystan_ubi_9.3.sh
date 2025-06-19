@@ -45,8 +45,8 @@ stanc --version
 cd $CURRENT_DIR
 git clone https://github.com/stan-dev/httpstan
 cd httpstan
-cp /cmdstan/bin/stanc /httpstan/httpstan/stanc
-chmod +x /httpstan/httpstan/stanc
+cp $CURRENT_DIR/cmdstan/bin/stanc $CURRENT_DIR/httpstan/httpstan/stanc
+chmod +x $CURRENT_DIR/httpstan/httpstan/stanc
 
 python3.12 -m pip install --upgrade pip setuptools wheel pandas
 python3.12 -m pip install poetry==1.7.1
@@ -76,9 +76,9 @@ if ! pip3.12 install -e . ; then
     exit 1
 fi
 
-rm -f /httpstan/httpstan/stanc
-cp /cmdstan/bin/stanc /httpstan/httpstan/stanc
-chmod +x /httpstan/httpstan/stanc
+rm -f $CURRENT_DIR/httpstan/httpstan/stanc
+cp $CURRENT_DIR/cmdstan/bin/stanc $CURRENT_DIR/httpstan/httpstan/stanc
+chmod +x $CURRENT_DIR/httpstan/httpstan/stanc
  
 if ! pytest ; then
     echo "------------------$PACKAGE_NAME:Install_success_but_test_fails---------------------"
