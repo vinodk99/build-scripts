@@ -47,15 +47,18 @@ git clone https://github.com/stan-dev/httpstan
 cd httpstan
 cp $CURRENT_DIR/cmdstan/bin/stanc $CURRENT_DIR/httpstan/httpstan/stanc
 chmod +x $CURRENT_DIR/httpstan/httpstan/stanc
+ln -sf $(ls -1 /usr/bin/python3.[0-9]* | grep -E '^/usr/bin/python3\.[0-9]+$' | sort -V | tail -n 1) /usr/bin/python3
+
+# Get Python include path
+PYTHON_INCLUDE=$(python3.12 -c "from sysconfig import get_paths; print(get_paths()['include'])")
+export CPLUS_INCLUDE_PATH=$PYTHON_INCLUDE:$CPLUS_INCLUDE_PATH
+export C_INCLUDE_PATH=$PYTHON_INCLUDE:$C_INCLUDE_PATH
+
+make 
 
 python3.12 -m pip install --upgrade pip setuptools wheel pandas
 python3.12 -m pip install poetry==1.7.1
 poetry export -f requirements.txt --without-hashes --dev -o requirements.txt
-make \
-  PYTHON_INCLUDE="-I/usr/include/python3.12" \
-  PYTHON_PLATINCLUDE="-I/usr/include/python3.12" \
-  PYTHON_CFLAGS="$(python3.12 -c 'import sysconfig; print(" ".join(sysconfig.get_config_vars("CFLAGS")))')" \
-  PYTHON_CCSHARED="$(python3.12 -c 'import sysconfig; print(" ".join(sysconfig.get_config_vars("CCSHARED")))')"
 
 python3.12 -m pip install -e .
 
@@ -69,7 +72,7 @@ git checkout $PACKAGE_VERSION
 python3.12 -m pip install -r $CURRENT_DIR/httpstan/requirements.txt
 poetry build -v
 
-if ! pip3.12 install -e . ; then
+if ! python3.12 -m pip install -e . ; then
     echo "------------------$PACKAGE_NAME:Install_fails-------------------------------------"
     echo "$PACKAGE_URL $PACKAGE_NAME"
     echo "$PACKAGE_NAME  |  $PACKAGE_URL | $PACKAGE_VERSION | GitHub | Fail |  Install_Fails"
